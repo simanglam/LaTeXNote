@@ -2,3 +2,6 @@
 *.pdf
 *.png
 data.csv
+.main.tex.swo
+.swp
+封面.tex

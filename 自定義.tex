@@ -1,0 +1,53 @@
+\chapter{自定義命令與環境}
+
+在看完了這麼多的 package 後，你會發現有時候為了追求美觀，可能會需要利用到大量的命令去調整輸出，如果只使用一次那還好說，但如果需要在文件中不斷地使用到這個功能，不斷重複的程式碼一來會增加 Debug 的困難度、二來還會降低效率，為了解決這種問題 \LaTeX 提供了以下四個命令來協助使用者自定義命令與環境。
+
+\begin{itemize}
+\item \verb|\newcommand{cmd}[必選參數的數量]{definition}|
+\item \verb|\renewcommand{cmd}[必選參數的數量]{definition}|
+\item \verb|\newenvironment{env}[必選參數的數量]{before env}{after env}|
+\item \verb|\renewenvironment{env}[必選參數的數量]{before env}{after env}|
+\end{itemize}
+
+\LaTeX 是是一個大小寫敏感的程式語言，所以 \verb|\LaTeX| 與 \verb|\latex| 是有所差別的，另外 \LaTeX 在命名上不能使用數字、符號等等，所有的命令皆只能由字母組成。另外除了定義新的命令外\LaTeX 提供了兩個以 re 開頭的命令，以讓我們改寫已被定義過的命令或環境。
+
+\section{自定義命令}
+
+在初步了解過如何自定義命令後就可以上手試試了，如果我們在排版中需要重複使用一個複雜的樣式，例如需要一個黃底、紅字、粗體的樣式來特別標注重點，如果正常使用應該會需要將三個命令套在一起使用，先不說方便性，使用的次數一多還會降低可讀性，所以我們可以將這一連串的命令定義成一個新的命令：
+
+\begin{tcblisting}{}
+\newcommand{\important}[1]{%定義名為 \important 的命令
+\colorbox{yellow}{\textcolor{red}{\textbf{#1}}}
+}
+這是一個非常\important{重要的公告}
+\end{tcblisting}
+
+可以看到我將 \verb|\important| 定義為一串命令，如此一來即可利用\verb|\important| 來代替一長串的命令，而在定義的過程中 \# 1代表的是必選參數一，若這個可選命令有多個必選參數，也必須以此類推，將 \# 1 一路加到 \# 9 為止，需要注意 \LaTeX 的必選參數是不可以超過 9 個的。
+
+\section{自定義環境}
+
+定義環境與定義命令相似，不同的點在於環境需要定義環境開始與結束時的命令，例如想要一個特殊的環境來區分引用的文字，可以從想要的呈現結果開始著手，我想要環境的上下留一點白、環境內的文字要改成斜體、還要一個必選參數將來源標示出來，請看以下的範例：
+
+\begin{tcblisting}{listing only}
+\newenvironment{poetry}[1]{%
+\newcommand{\poetryfer}{#1}
+\vskip6pt plus 2pt minus 2pt
+\let\oldparindent\parindent
+\setlength{\parindent}{0pt}
+\setlength{\leftskip}{12pt}\itshape}{
+\\ －\poetryfer 
+\vskip6pt plus 2pt minus 2pt
+\setlength{\parindent}{\oldparindent}
+}
+\end{tcblisting}
+
+\begin{poetry}{邱妙津《蒙馬特遺書》}
+世界總是沒有錯的，\\
+錯的是心靈的脆弱性，\\
+我們不能免除於世界的傷害，\\
+於是我們就要長期生著靈魂的病。
+\end{poetry}
+
+上面是這個範例的結果，在這個範例中，我們定義了 poetry 環境，在環境開始之前會先由 vskip 留白，接者再利用 \verb|\let| 命令將原先的縮排長度暫存起來，而後將縮排長度改成零，最後將整段的縮進設為 12pt 字體設為斜體。在環境結束的時候，先換到下一行再將來源標示出來，要注意在第二格括號內是不能使用必選參數的，但可以先在第一個括號中儲存成命令，在第二個括號中再利用命令的方式使用。
+
+這就是在 \LaTeX 中自定義環境與命令的方式，善用這個技巧可以確保排版的一致性也可以減少所需使用的命令數。

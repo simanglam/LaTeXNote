@@ -1,48 +1,234 @@
+%\chapter{數學}
+%
+%\TeX\ 原先被發明的原因便是因為不滿當時數學方程式的排版，而這麼多年過去了依舊沒有任何軟體可以在數學排這方面與 \TeX 平起平坐，以 \TeX 為核心的 \LaTeX 當然也繼承了這份優勢，至今依舊是論文排版的首選工具，其中被用到最多的功能就是數學排版，這也是在使用 \LaTeX 的過程中該去鑽研的一個部分。
+%
+%\section{基礎使用}
+%
+%想要在 \LaTeX 中打出數學方程式必須要先進入數學模式，想要進入數學模式可以使用以下幾種方式：
+%
+%\begin{itemize}
+%\item \verb|$......$| 
+%\item \verb|\(.....\)|
+%\item math 環境
+%\item \verb|\[.....\]|
+%\item displaymath 環境
+%\item equation 環境
+%\end{itemize}
+%
+%以上幾種方式都會進入數學模式，會有這麼多種方式主要還是因為有多種需求，主要會是隨文(math inline mode)與展式(math display mode)這兩種不同的樣式，隨文會將方程式放在段落中的文字之間，而展示則會賃開空間將數學方程式獨立展示，這可以用於強調一個重要的公視會數學推導過程。
+%
+%\begin{figure}[htp]
+%\begin{minipage}{0.5\textwidth}
+%隨文數式：
+%\( F = G\frac{m_1m_2}{r^2}\)
+%\end{minipage}
+%\begin{minipage}{0.5\textwidth}
+%展式數式：
+%\[ F = G\frac{m_1m_2}{r^2}\]
+%\end{minipage}
+%\caption{展式數式與隨文數式}
+%\end{figure}
+%
+%
+%可以看到這兩種不同的樣式的區別，但這兩者的原始碼皆相同，只是由於樣式的不同所以結果不同。
+%
+%\section{數學符號與實例}
+%
+%在一般的輸入法中，是沒有辦法直接打出數學符號的，就算可以也不建議這樣使用，因為很多時候都需要依照前後的符號來調整間距，所以還是建議利用命令的方式來輸入數學符號。
+%
+%\section{分數}
+%
+%分數是利用 \verb|\frac{}{}| 來進行排版的：
+%
+%\begin{tcblisting}{listing side text}
+%\[
+%V = \frac{\Delta S}{T}
+%\]
+%\end{tcblisting}
+%
 \chapter{數學}
 
-\TeX\ 原先被發明的原因便是因為不滿當時數學方程式的排版，而這麼多年過去了依舊沒有任何軟體可以在數學排這方面與 \TeX 平起平坐，以 \TeX 為核心的 \LaTeX 當然也繼承了這份優勢，至今依舊是論文排版的首選工具，其中被用到最多的功能就是數學排版，這也是在使用 \LaTeX 的過程中該去鑽研的一個部分。
+\LaTeX\ 很大的一部分功用是排版科學相關文章，而佔最大宗的還是數學相關的文章，因為 \LaTeX\ 有著平易近人的數學輸入法以及足夠大的談鋞，至今扔是學術界慣用的排版軟體。
+
+\section{基本概念}
+
+最簡單的用法是將方程式用 \verb`$......$` 包起來，這樣可以在行內插入數學方程式
+
+\begin{tcblisting}{listing side text}
+畢氏定理$C =\sqrt{A^2 + B^2} $
+\end{tcblisting}
+
+但當方程式很複雜、或非常重要，讓你需要為他特別清出空間，好彰顯這個方程式的重要性，這時可以使用 \verb`\[......\]` 把方程式包起來
+
+\begin{tcblisting}{listing side text}
+畢氏定理：
+\[C =\sqrt{A^2 + B^2}\]
+相當的重要
+\end{tcblisting}
+
+雖然這兩者在輸入上沒有任何的差別，但在輸出上還是會有些許的不同
+
+\begin{tcblisting}{listing side text}
+這是隨文數式：$\Sigma^{60}_{k=31}\sin^2k^\circ$\\
+這是展示數式：
+\[ \Sigma^{60}_{k=31}\sin^2k^\circ \]
+\end{tcblisting}
+
+可以看到上下標的位置有所改變
 
 \section{基礎使用}
 
-想要在 \LaTeX 中打出數學方程式必須要先進入數學模式，想要進入數學模式可以使用以下幾種方式：
+先從最簡單的四則運算開始說起，除了乘、除的符號需要用 \verb`\times` 與 \verb`\div` 表示以外，其他的運算子都不需要使用命令來表示。
 
-\begin{itemize}
-\item \verb|$......$| 
-\item \verb|\(.....\)|
-\item math 環境
-\item \verb|\[.....\]|
-\item displaymath 環境
-\item equation 環境
-\end{itemize}
+\begin{tcblisting}{listing side text}
+$A + B - C \times D \div E = F$
+\end{tcblisting}
 
-以上幾種方式都會進入數學模式，會有這麼多種方式主要還是因為有多種需求，主要會是隨文(math inline mode)與展式(math display mode)這兩種不同的樣式，隨文會將方程式放在段落中的文字之間，而展示則會賃開空間將數學方程式獨立展示，這可以用於強調一個重要的公視會數學推導過程。
+如果想要輸出分數，需要使用 \verb`\frac{分子}{分母}` 輸出
 
-\begin{figure}[htp]
-\begin{minipage}{0.5\textwidth}
-隨文數式：
-\( F = G\frac{m_1m_2}{r^2}\)
-\end{minipage}
-\begin{minipage}{0.5\textwidth}
-展式數式：
-\[ F = G\frac{m_1m_2}{r^2}\]
-\end{minipage}
-\caption{展式數式與隨文數式}
-\end{figure}
+\begin{tcblisting}{listing side text}
+$\frac{a}{b}\\
+(\frac{a}{b})^2$
+\end{tcblisting}
 
+上面的例子有一個問題，第二行的括號會看起來太小，這時候可以利用 \verb`\left(......\right)` 來讓 \LaTeX\ 自動調整括號的大小。
 
-可以看到這兩種不同的樣式的區別，但這兩者的原始碼皆相同，只是由於樣式的不同所以結果不同。
+\begin{tcblisting}{listing side text}
+$\left(\frac{a}{b}\right)^2$
+\end{tcblisting}
 
-\section{數學符號與實例}
+今天的內容有涉及到美國數學家協提供的 \textbf{amssym, amsfonts} 與 \textbf{amsmath} ，若有涉及到這些 package 的應用，我會在下面特別標注，如果沒有標註就是\LaTeX\ 基本的使用。
 
-在一般的輸入法中，是沒有辦法直接打出數學符號的，就算可以也不建議這樣使用，因為很多時候都需要依照前後的符號來調整間距，所以還是建議利用命令的方式來輸入數學符號。
+\section{各種的應用}
 
-\section{分數}
+基本的函數都是用反斜槓加函數名稱的方式輸出
 
-分數是利用 \verb|\frac{}{}| 來進行排版的：
+\begin{tabular}{cccc}
+\hline
+\verb`\sin` & \verb`\cos` & \verb`\tan` & \verb`\cot` \\\hline
+\verb`\arccos`  & \verb`\arcsin` & \verb`\arctan` & \verb`\sec` \\\hline
+\verb`\csc`  & \verb`\exp` & \verb`\log` & \verb`\deg` \\\hline
+\verb`\lim` & \verb`\inf`  & \verb`\min` & \verb`\max` \\\hline
+\end{tabular}
+
+想要使用其他字體嗎？\LaTeX\ 提供了以下幾種字體
+
+\begin{tabular}{cc}
+\hline
+字體|結果 \\\hline\hline
+\verb`\mathrm{ABCabc123}` & $\mathrm{ABCabc123}$ \\\hline
+\verb`\mathit{ABCabc123}` & $\mathit{ABCabc123}$ \\\hline
+\verb`\mathnormal{ABCabc123}` & $\mathnormal{ABCabc123}$ \\\hline
+\verb`\mathcal{ABCabc123}` & $\mathcal{ABCabc123}$ \\\hline
+\end{tabular}
+
+數學模式的輸出皆為斜體，可以用 \verb`\mathrm{}` 轉為正體，如果想在數學模式中加粗字體，可以利用 amsmath 提供的 \verb`\boldsymbol` 命令
+
+\begin{tcblisting}{listing side text}
+$
+\mu ,\boldsymbol{\mu}\\
+\delta ,\boldsymbol{\delta}
+$
+\end{tcblisting}
+
+空心粗體則需要 \textbf{amsfonts} 提供的 \verb`\mathbb{}` 命令
+
+\begin{tcblisting}{listing side text}
+$
+x > 1 and x \in \mathbb{R}
+$
+\end{tcblisting}
+
+如果想要將某個公式的推導過程寫下，可以利用 \textbf{amsmath} 提供的 align 環境
+
+\begin{tcblisting}{listing side text}
+\begin{align}
+x &= 20 +5\\
+x &= 25
+\end{align}
+\end{tcblisting}
+
+在想要對齊的地方用 \& 指定即可，實際上的使用方式就與表格類似，如果不想要編號，使用帶星號的 \verb`align*` 即可
+
+\begin{tcblisting}{listing side text}
+\begin{align*}
+x &= 20 +5\\
+x &= 25
+\end{align*}
+\end{tcblisting}
+
+如果需要輸出矩陣，可以使用 \verb`matrix` 環境
+
+\begin{tcblisting}{listing side text}
+$
+\begin{matrix}
+3 & 0\\
+0 & 3
+\end{matrix}
+$
+\end{tcblisting}
+
+但這樣就只是一些對齊的的數字，所以我們可以利用以下的方式來輸出含有小括號的矩陣
 
 \begin{tcblisting}{listing side text}
 \[
-V = \frac{\Delta S}{T}
+\left(\begin{matrix}
+2 & 0\\
+0 & 2
+\end{matrix}\right)
 \]
 \end{tcblisting}
 
+或者使用由 amsmath 提供的 pmatrix 環境
+
+\begin{tcblisting}{listing side text}
+\[
+\begin{pmatrix}
+2 & 0\\
+0 & 2
+\end{pmatrix}
+\]
+\end{tcblisting}
+
+不只是小括號，也可以使用方括號、花括號
+
+\begin{tcblisting}{listing side text}
+\[
+\begin{bmatrix}
+2 & 0\\
+0 & 2
+\end{bmatrix}
+\begin{Bmatrix}
+2 & 0\\
+0 & 2
+\end{Bmatrix}
+\]
+\end{tcblisting}
+
+甚至是行列式也可以利用這個方法輸出
+
+\begin{tcblisting}{listing side text}
+\[
+\begin{vmatrix}
+2 & 0\\
+0 & 2
+\end{vmatrix}
+\begin{Vmatrix}
+2 & 0\\
+0 & 2
+\end{Vmatrix}
+\]
+\end{tcblisting}
+
+如果想要輸出聯立方程式，可以利用 amsmath 提供的 cases 環境
+
+\begin{tcblisting}{listing side text}
+\[
+\begin{cases}
+x &= 1\\
+y &= 3x + 9
+\end{cases}
+\]
+\end{tcblisting}
+
+當然，我所列出的例子只是滄海一粟，實際上還有更多的可能性，但由於我很少利用這部分的功能，所以我只能簡單地把我知道的使用方式全都寫出，更進一步的使用方式可以參考這些文章。
