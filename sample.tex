@@ -1,0 +1,17 @@
+\documentclass[]{standalone}
+%\usepackage{xeCJK}
+%\setCJKmainfont[ItalicFont = 王漢宗中行書繁]{王漢宗特明體繁}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{lindenmayersystems}
+\pgfdeclarelindenmayersystem{myrule}{
+\rule{F->F}
+\rule{X->F[+X][X][-X]FX}
+}
+\begin{document}
+\begin{tikzpicture}
+\draw [green!50!black, rotate = 90]
+    [l-system={myrule, axiom=FFFX, order=5, step=0.5cm, angle=45}]
+    lindenmayer system; 
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,104 @@
+\documentclass[10pt, svgnames, twoside]{NGPLB}
+\usepackage{geometry}
+\geometry{papersize={188mm, 263mm}, top=2.8cm, outer=2.3cm, inner=2.3cm, bottom=2.8cm, footskip=24pt}
+\usepackage{xeCJK}
+\setCJKmainfont[
+BoldFont =王漢宗特黑體繁,
+ItalicFont = 王漢宗中行書繁,
+BoldItalicFont = 王漢宗綜藝體繁]{王漢宗特明體繁}
+\setCJKmonofont{王漢宗特明體繁}
+\newCJKfontfamily\Song{Songti TC}
+\newCJKfontfamily\Kai{TW-Kai}
+\newCJKfontfamily\Raun{jf-openhuninn-1.1.ttf}
+\newCJKfontfamily\Hei{Heiti TC}
+
+\usepackage{enumitem}
+\setlist{noitemsep}
+\usepackage{lipsum}
+\usepackage{tabulary}
+\usepackage{tikz}
+\linespread{1.5}
+\pagenumbering{arabic}
+\usepackage{graphicx}
+\graphicspath{{fig/}}
+\usepackage{wrapfig}
+\usepackage{etoolbox}
+\AtBeginEnvironment{tabular}{\vskip6pt}
+\AfterEndEnvironment{tabular}{\vskip6pt}
+
+\usepackage[]{xcolor}
+\usepackage[most,minted]{tcolorbox}
+\usepackage{minted}
+\tcbuselibrary{skins,minted,breakable}
+\tcbset{fontupper=\small, breakable, skin=bicolor ,listing engine={minted} ,colback=gray!30!white, colbacklower=gray!5!white, colframe=gray!30!white, minted options={linenos, breaklines, breakanywhere, xleftmargin = 5pt}}
+
+\usepackage{xurl}
+\usepackage[breaklinks=true]{hyperref}
+\urlstyle{same}
+\hypersetup{
+hidelinks,
+linkcolor=blue,
+urlcolor=cyan,
+hyperindex = false
+}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\definecolor{fpft}{HTML}{C2C6A7}
+\definecolor{fpbg}{HTML}{254441}
+\setlength{\parindent}{0pt}
+
+\usepackage{mhchem}
+\usepackage{chemfig}
+\usepackage{listings}
+\newcommand{\TikZ}{Ti\textit{k}Z}
+\usepackage{pgfplots}
+\setcounter{tocdepth}{1}
+\setlength{\parskip}{5pt}
+\newcommand{\pskip}{\vskip10pt}
+
+\usepackage[andrew]{bettertitle}
+\author{周造麟}
+\title{我也來學 \LaTeX}
+\subtitle{通往排版的大門}
+\email{qwer09214@gmail.com}
+
+\usepackage{hologo}
+\newcommand{\XeTeX}{\hologo{XeTeX}}
+\newcommand{\XeLaTeX}{\hologo{XeLaTeX}}
+
+\newenvironment{poetry}[1]{%
+\newcommand{\poetryfer}{#1}
+\vskip12pt plus 2pt minus 2pt
+\let\oldparindent\parindent
+\setlength{\parindent}{0pt}
+\setlength{\leftskip}{12pt}\itshape}{
+\\ －\poetryfer 
+\vskip12pt plus 2pt minus 2pt
+\setlength{\parindent}{\oldparindent}}
+
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\tableofcontents\newpage\pagenumbering{arabic}%\renewcommand{\headrulewidth}{0pt}
+%\input{前言}
+\input{LaTeX 歷史}\newpage
+\input{第一部分.tex}
+\input{數學1.tex}\newpage
+\input{xcolor}\newpage%%xcolor
+\input{化學}\newpage%%化學
+\input{listing}\newpage%%listing
+\input{tcolorbox}\newpage%%tcolorbox
+\input{tikz}\newpage%%tikz
+\input{pgfplots}\newpage%%pgfplots
+\input{Beamer}\newpage%%Beamer
+\input{biblatex}\newpage%%biblatex
+\input{animate}\newpage%%animate
+\input{lualatex}\newpage%%lualatex
+\input{lualatex 做動畫}\newpage%%lualatex 做動畫
+\input{自定義.tex}\newpage
+\input{etoolbox}\newpage%%etoolbox
+\input{繼續前行}\newpage%%繼續前行
+\input{Beyond LaTeX}\newpage%%Beyond LaTeX
+\end{document}

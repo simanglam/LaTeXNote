@@ -1,0 +1,45 @@
+\chapter{etoolbox}
+
+倒數第二天了，今天要跟大家介紹 etoolbox 這個可以讓你編輯已有命令的 package。
+
+\section{使用之前}
+
+因為這個 package 是讓你編輯已有命令，所以在編輯之前我們必須先找出命令的原始定義，LaTeX 提供了 \verb`\show` 這個命令來協助我們，只要在 \verb`\show`後面接上想要查詢的指令，就可以在 .log 檔中看到命令的定義，除了利用 \verb`\show` 查詢之外，我們也可以直接在原始碼中尋找定義。
+
+不過以上兩種方式都有不便之處，\verb`\show` 無法快速的顯示出命令的定義，直接在原始碼中尋找定義又會花上大把的時間。我們急需一個更方便的方式來尋找命令的定義，latexdef 是你的一個好選擇，只要在終端機上打出 latexdef 加上你要找尋的命令即可。
+
+\begin{tcblisting}{listing only}
+latexdef TeX
+\end{tcblisting}
+
+\section{實戰}
+
+這裡以有章節標題頁無法被自定義為例，跟章節標題有關的命令只有\verb`\chapter` 所以先讓我們看看 \verb`\chapter` 的定義：
+
+\begin{tcblisting}{listing only}
+latexdef chapter
+\chapter:
+undefined
+\end{tcblisting}
+
+你會發現怎麼找不到他的定義，這是因為 latexdef 預設是載入 Plain \TeX\ 格式，而不是 \LaTeX\ 格式，並且預設的文件格式是 article 所以我們還需要指定文件格式：
+
+\begin{tcblisting}{listing only}
+latexdef --tex latex -c report chapter
+\chapter:
+\long macro:->\if@openright \cleardoublepage \else \clearpage \fi \thispagestyle {plain}\global \@topnum \z@ \@afterindentfalse \secdef \@chapter \@schapter
+\end{tcblisting}
+
+\begin{itemize}
+\item \verb`--`tex 是指定載入的格式
+\item -c 是指定載入的文件類別
+\end{itemize}
+
+這樣我們就得到\verb|\chapter|的定義了，在裡面找到\verb|\thispagestyle{plain}|這個罪魁禍首，利用 etoolbox 提供的\verb|\xpatchcmd|來修改：
+
+\begin{tcblisting}{listing only}
+%\xpatchcmd{命令}{修改前內容}{修改後內容}{ }{ }
+\xpatchcmd{\chapter}{\thispagestyle{plain}}{ }{ }{ }
+\end{tcblisting}
+
+這樣就可以讓標題頁的樣式是自定義的樣式了。這也是簡單修改命令定義的方式。

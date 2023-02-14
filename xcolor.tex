@@ -1,0 +1,79 @@
+\chapter{xcolor}
+
+在前半段的使用中 \LaTeX\ 產出的文字都是黑白的，如果想要讓 \LaTeX\ 變成彩色的，需要加入 xcolor 這個 package
+
+\section{定義顏色}
+
+xcolor 提供了 \verb|\definecolor{名字}{模型}{參數}| 命令供定義顏色，xcolor 支持 html, rgb, cmyk 等等的顏色模型，用不同的模型會影響參數的形式，
+
+\begin{tcblisting}{listing only}
+\definecolor{cyan1}{rgb}{0, 255, 255}
+\definecolor{cyan2}{HTML}{00FFFF}
+\definecolor{cyan3}{cmyk}{255, 0, 0, 0}
+\end{tcblisting}
+
+上面雖然都用不同的顏色模型，但定義出的顏色都是一樣的，xcolor 本身有預定義一些基本顏色，如同下表所示
+
+\begin{table}[htp]
+\newcommand{\showcolor}[1]{\colorbox{#1}{\hspace{12pt}}#1 \hskip3pt}
+\centering
+\begin{tabular}{lllll}
+\hline
+\showcolor{black} & \showcolor{darkgray} & \showcolor{lime} & \showcolor{pink} & \showcolor{violet} \\\hline
+\showcolor{blue} & \showcolor{gray} & \showcolor{magenta} & \showcolor{purple} & \showcolor{white} \\\hline
+\showcolor{brown} & \showcolor{green} & \showcolor{olive} & \showcolor{red} & \showcolor{yellow} \\\hline
+\showcolor{cyan} & \showcolor{lightgray} & \showcolor{orange} &  &  \\\hline
+\end{tabular}
+\end{table}
+
+
+除此之外 color 也提供了`svgnames, dvinames, x11names` 這三個選項提供更多預定義好的顏色
+
+\begin{tcblisting}{listing only}
+\usepackage[svgnames]{xcolor}
+\usepackage[dvinames]{xcolor}
+\usepackage[x11names]{xcolor}
+\end{tcblisting}
+
+如果想要讓兩種顏色混合，可以利用 \verb|\colorlet{名稱}{混合方式}| 來混合兩種顏色
+
+
+\begin{tcblisting}{listing only}
+\colorlet{mycolor1}{yellow!10!red}
+\colorlet{mycolor2}{blue!10}
+\end{tcblisting}
+
+mycolor1 會是 10\%的黃色加上90\%紅色，mycolor2 會是10\%藍色加上90\%的白色。
+
+\section{文字顏色}
+
+想要讓文字上色有兩種辦法，一種是利用 \verb|\color{}| 將更改預設顏色，另一種是利用 \verb|\textcolor{顏色}{文字}| 小範圍的更改。
+
+\begin{tcblisting}{listing side text}
+\color{yellow}
+Banana\\
+\color{red}
+Apple \textcolor{blue}{Ocean}
+\end{tcblisting}
+
+如果是想要幫文字上底色，可以使用 \verb|\colorbox{顏色}{文字}| 上色
+
+\begin{tcblisting}{listing side text}
+\colorbox{yellow}{Important}
+\end{tcblisting}
+
+如果想要邊匡，可以利用 \verb|\fcolorbox{邊匡顏色}{底色}{文字}|
+
+\begin{tcblisting}{listing side text}
+\colorlet{mycolor}{blue!50}
+\fcolorbox{red}{yellow}{IMPORTANT}\\
+\fcolorbox{blue}{mycolor}{Relax}
+\end{tcblisting}
+
+\section{背景顏色}
+
+背景顏色可以利用 \verb|\pagecolor{}| 來更改
+
+\begin{tcblisting}{listing only}
+\pagecolor{red}
+\end{tcblisting}

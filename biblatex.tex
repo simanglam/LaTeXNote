@@ -1,0 +1,87 @@
+\chapter{biblatex}
+
+biblatex 是一個管理參考文獻的 package，他可以幫助我們方便快速的管理參考文獻。
+
+\section{前置作業}
+
+首先我們需要準備 .bib 檔， .bib 檔的基礎形式如下
+
+\begin{tcblisting}{listing only}
+@Article{key,
+author = {作者},
+title = {標題},
+journal = {期刊},
+year = {年份},
+}
+\end{tcblisting}
+
+
+\verb`@Article` 是宣告參考文獻是期刊中的文章，key 是在文章中引用連結使用的，但通常我們不用親自撰寫 .bib 檔，因為像 Google Scholar 之類的文獻資料庫都會提供 bibtex 的格式。
+
+圖片
+
+上圖是如何在 Google Scholar 取得 .bib 檔的方式。
+
+\section{基礎使用}
+
+在準備好 .bib 檔後就可以開始使用 biblatex 了，首先我們需要告訴 biblatex 我們的 .bib 檔叫什麼名字。
+
+\begin{tcblisting}{listing only}
+%\usepackage{biblatex}
+\addbibresource{name.bib}
+\end{tcblisting}
+
+利用 \verb`\addbibresource{•}` 告訴 biblatex .bib 檔的名稱後，我們就可以利用 \verb`\cite{key}` 在文章中引用參考文獻了。
+
+\begin{tcblisting}{listing only}
+Free software 跟價錢並沒有關係，這裡的 Free 指的是自由。\cite{stallman2002free}
+\end{tcblisting}
+
+如果不是使用 overleaf 的人需要注意，我們需要額外跑一次 bibber 和兩次 \LaTeX ，順序如下：
+
+\begin{enumerate}
+\item \LaTeX
+\item biber
+\item \LaTeX 
+\item \LaTeX
+\end{enumerate}
+
+這樣就可以引用參考文獻了，但我們還需要用 \verb`\printbibliography` 將有用到的參考資料都列出來。
+
+\begin{tcblisting}{listing only}
+\printbibliography
+\end{tcblisting}
+
+這樣所有被引用過的資料就都被列出來了，如果有參考文獻沒有被直接引用，又想要讓他出現在此，需要用 \verb`\nocite{key}` 將他列出來。
+
+\begin{tcblisting}{listing only}
+Free software 跟價錢並沒有關係，這裡的 Free 指的是自由。\cite{stallman2002free}
+\nocite{key}
+\printbibliography
+\end{tcblisting}
+
+如果想將檔案中所有的參考文獻都列出，只需將 key 換成 * 就好了，如果引用了許多文章，但最後在列出時想要分類這一大群的參考文獻時，有兩種方法，第一種是利用 \verb`type=` 來依照參考文獻的類型分類。
+
+\begin{tcblisting}{listing only}
+\printbibliography[type=article, title=article]
+\printbibliography[type=book, title=book]
+\end{tcblisting}
+
+第二個方法是在撰寫 bib 檔時加入 \verb`keywords` ，以便分類。
+
+\begin{tcblisting}{listing only}
+\printbibliography[keyword=LaTeX, title=article]
+\printbibliography[keyword=Overleaf, title=book]
+\end{tcblisting}
+
+\begin{tcblisting}{listing only}
+@book{stallman2002free,
+  title={Free software, free society: Selected essays of Richard M. Stallman},
+  author={Stallman, Richard},
+  year={2002},
+  publisher={Lulu. com},
+  keywords={}
+}
+\end{tcblisting}
+
+如果想要更進一步的了解 biblatex 到底可以做什麼，可以參考以下幾篇文章。

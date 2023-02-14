@@ -1,0 +1,70 @@
+\chapter{animate}
+
+有時候人總是要會一兩招華而不實的招數，好在需要的時候秀一手，我們可以藉由在 pdf 中加入 gif 動畫以達到上述的效果。
+
+\section{基礎使用}
+
+在使用之前需要先在導言區載入 graphicx package，在載入之後我們就可以利用  \verb`\animategraphics{}{}{}{}` 來插入動畫，但在插入動畫之前，我們需要先了解 animate 是如何插入動畫的，實際上 animate 並不能將 gif 直接塞入 pdf 中，他是利用 javascript 讓 pdf 中的圖片可以動起來，所以在拿到 gif 後我們還需要將 gif 轉成其他格式。
+
+\subsection{格式轉換}
+
+我們需要使用各種手段將 gif 轉換成 png 或 jpeg 等，可以使用 ImageMagick 這個工具來轉換，在安裝好之後可以在終端機用 convert 命令來轉換格式，
+
+\begin{tcblisting}{listing only}
+convert input.gif -coalesce output.png
+\end{tcblisting}
+
+可以利用這行命令將 gif 改成一系列的圖片。
+
+\subsection{正式使用}
+
+\begin{tcblisting}{listing only}
+\animategraphics[autoplay]{.5}{A-}{1}{5}
+\end{tcblisting}
+
+\begin{itemize}
+\item 前面中括號內放可選參數
+\item 第一個花括號是指定動畫的幀數
+\item 第二個花括號是檔案的前綴名
+\item 第三個花括號是檔案的開頭、第四個則是結束，這條指令會將 A-1, A-2, A-3, A-4, A-5 作為動畫的
+\end{itemize}
+
+這裡有一系列的可選參數
+
+\begin{itemize}
+\item autoplay: 當滑到動畫所在的頁面時自動播放
+\item loop: 不斷重複播放動畫
+\item palindrome: 在動畫播放完後倒帶動畫，並重新循環
+\item step: 將動畫的放映模式改成點一下播一張
+\item controls: 決定動畫下的播放按鈕
+\item label: 給定一個 javascript 的標籤
+\end{itemize}
+
+\subsection{自行繪製}
+
+隨意使用網路上的 gif 圖可能會有版權相關的問題，但好在我們可以利用 animateinline 環境來自行繪製。
+
+\begin{tcblisting}{listing only}
+\begin{animateinline}[begin={\begin{tikzpicture}\draw (-1,-1) rectangle (3.5,1);}end={\end{tikzpicture}}]{0.5}
+\draw (0,0)--(0.5,0);
+\newframe
+\draw (0,0)--(1,0);
+\newframe
+\draw (0,0)--(1.5,0);
+\newframe
+\draw (0,0)--(2,0);
+\newframe
+\draw (0,0)--(2.5,0);
+\newframe
+\draw (0,0)--(3,0);
+\newframe
+\draw (0,0)--(3.5,0);
+\end{animateinline}
+\end{tcblisting}
+
+\begin{itemize}
+\item begin 跟 emd 是指在每一幀之前自動插入的命令
+\item 整個動畫的大小是依據第一幀的大小來進行縮放的，所以我在每一幀都加入了看不見的正方形以維持動畫大小的一致性
+\end{itemize}
+
+當然這些只是簡單的範例，只要你想得到，沒有什麼是你做不出來的。

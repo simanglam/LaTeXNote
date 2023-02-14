@@ -1,0 +1,129 @@
+\chapter{listing}
+
+要想在 \LaTeX 中列出程式碼顯然不能手動在每一個命令前都手動加一個\verb|\textbackslash|，一來這樣過於耗時且造成可讀性降低，二來這樣也沒有完善的語法標示，要解決這個困難可以利用一些 package 來解決。
+
+\section{\LaTeX 內建}
+
+如果不利用其他 package ，\LaTeX 本身就有內建這個功能，我們可以利用\verb`\verb| |` 來將命令給列出來：
+
+\begin{tcblisting}{listing side text}
+用 \verb|\begin{center}| 來將文字置中
+\end{tcblisting}
+
+這通常用於在文章段落中穿插的時候，如果有一長串的程式碼要展示就不適合用這個方法了，這種時候可以改用 verbatim 環境，這兩個就像是在數學章節中提到的展式數式與隨文數式的差別一樣。
+
+\begin{tcblisting}{}
+\begin{verbatim}
+\newcounter{example}
+\newenvironment{example}{
+\refstepcounter{example}
+\textbf{Example.\theexample}\ 
+}{\\}
+\end{verbatim}
+\end{tcblisting}
+
+可以看到這樣單獨的產生了一個區塊來展示程式碼，可是這樣是沒有語法突顯，看起來會稍微有些痛苦，想要改善這種情況就只能額外用 package 了。
+
+\section{listings}
+
+首先要介紹的是 listing，
+
+\begin{tcblisting}{listing side text}
+\begin{lstlisting}
+\begin{itemize}
+\item 1
+\item 2
+\item 3
+\end{itemize}
+\end{lstlisting}
+\end{tcblisting}
+
+你會看到上面的例子也沒有改善多少，這是因為我們還沒定義程式碼的樣式。
+
+\begin{tcblisting}{listing side text}
+\begin{lstlisting}[language={[LaTeX]TeX}, commentstyle=\color{red} ,keywordstyle=\color{blue}, numbers=left]
+\begin{itemize}
+\item 1
+\item 2
+\item 3
+\end{itemize}
+%一個不知道為什麼的列表
+\end{lstlisting}
+\end{tcblisting}
+
+這樣看起來就好許多了，可是每一次都打這一大長串也不方便，所以可以利用 \verb`\lstset `來設定默認的參數。
+
+\begin{tcblisting}{listing only}
+\lstset{
+    language={[LaTeX]TeX},
+    basicstyle=\sffamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    frame=tb,
+    tabsize=4,
+    commentstyle=\color{blue},
+    keywordstyle=\color{red},
+    morekeywords={ce,draw,node,foreach,in,chemfig,bond,href,hologo,
+    ifthenelse,addplot,addplot3,coordinates}
+}
+\end{tcblisting}
+
+language 是設定程式語言的類型，basicstyle 是設定列出來成果的格式，numberstyle 是控制數字的格式，commentstyle 是控制註解的格式，keywordstyle 是控制關鍵字的格式，morekeywords 則是可以自行加入星的關鍵字。
+
+\section{minted}
+
+但上面的方法有一個問題，就是他只能標記出有被設定過的關鍵字，有時候多少會有點不方便，於是有人將 Pygment 與 \LaTeX\ 結合起來做成了 minted 這個 package，在使用 minted 之前請先確保自己的電腦內有 Pygment詳細的下載方式請參考下面這篇文章。<https://clay-atlas.com/blog/2020/02/10/python-chinese-tutorial-package-pygments-code-highlight/>
+
+minted 提供了 \verb`\begin{minted}[參數]{語言}`......\verb`\end{minted}` 來輸出程式碼
+
+\begin{tcblisting}{listing side text}
+\begin{minted}{latex}
+\begin{itemize}
+\item 1
+\item 2
+\item 3
+\end{itemize}
+\end{minted}
+%一個不知道為什麼的列表
+\end{tcblisting}
+
+可以看到這樣好看很多，如果想要微調輸出格式可以在利用以下的參數。
+
+\begin{tabular}{cc}
+參數 & 含義 \\\hline\hline
+lineos & 顯示程式碼行數 \\\hline
+bgcolor & 背景顏色 \\\hline
+numbers & 顯示程式碼行數（可指定位置） \\\hline
+mathescape & 可以在 minted 環境中直接輸入數學方程式 \\\hline
+escapeinside & 設定跳拖字符 \\\hline
+breaklines & 可不可將程式碼換行 \\\hline
+\end{tabular}
+
+\begin{tcblisting}{listing side text}
+\begin{minted}[linenos, breaklines, mathescape, escapeinside=| |]{latex}
+\begin{itemize}
+\item 1
+\item 2
+\item 3
+\end{itemize}
+$\Sigma_{k=100} \sin(k^\circ)$
+|\textcolor{red}{ABC}|
+\end{minted}
+\end{tcblisting}
+
+如果想要使用別種配色，Pygment 有內建許多不同的 style 可供選擇，只要使用 \verb`\usemintedstyle{style}` 選擇即可。
+
+\begin{tcblisting}{listing side text}
+%\usemintedstyle{vim}
+\begin{minted}[linenos, breaklines, mathescape, escapeinside=| |]{latex}
+\begin{itemize}
+\item 1
+\item 2
+\item 3
+\end{itemize}
+$\Sigma_{k=100} \sin(k^\circ)$
+|\textcolor{red}{ABC}|
+\end{minted}
+\end{tcblisting}
+
+這樣就可以更改樣式了，詳細的樣式與支持的語言，請參考 Pygment 的官網。

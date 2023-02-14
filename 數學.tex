@@ -1,0 +1,48 @@
+\chapter{數學}
+
+\TeX\ 原先被發明的原因便是因為不滿當時數學方程式的排版，而這麼多年過去了依舊沒有任何軟體可以在數學排這方面與 \TeX 平起平坐，以 \TeX 為核心的 \LaTeX 當然也繼承了這份優勢，至今依舊是論文排版的首選工具，其中被用到最多的功能就是數學排版，這也是在使用 \LaTeX 的過程中該去鑽研的一個部分。
+
+\section{基礎使用}
+
+想要在 \LaTeX 中打出數學方程式必須要先進入數學模式，想要進入數學模式可以使用以下幾種方式：
+
+\begin{itemize}
+\item \verb|$......$| 
+\item \verb|\(.....\)|
+\item math 環境
+\item \verb|\[.....\]|
+\item displaymath 環境
+\item equation 環境
+\end{itemize}
+
+以上幾種方式都會進入數學模式，會有這麼多種方式主要還是因為有多種需求，主要會是隨文(math inline mode)與展式(math display mode)這兩種不同的樣式，隨文會將方程式放在段落中的文字之間，而展示則會賃開空間將數學方程式獨立展示，這可以用於強調一個重要的公視會數學推導過程。
+
+\begin{figure}[htp]
+\begin{minipage}{0.5\textwidth}
+隨文數式：
+\( F = G\frac{m_1m_2}{r^2}\)
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+展式數式：
+\[ F = G\frac{m_1m_2}{r^2}\]
+\end{minipage}
+\caption{展式數式與隨文數式}
+\end{figure}
+
+
+可以看到這兩種不同的樣式的區別，但這兩者的原始碼皆相同，只是由於樣式的不同所以結果不同。
+
+\section{數學符號與實例}
+
+在一般的輸入法中，是沒有辦法直接打出數學符號的，就算可以也不建議這樣使用，因為很多時候都需要依照前後的符號來調整間距，所以還是建議利用命令的方式來輸入數學符號。
+
+\section{分數}
+
+分數是利用 \verb|\frac{}{}| 來進行排版的：
+
+\begin{tcblisting}{listing side text}
+\[
+V = \frac{\Delta S}{T}
+\]
+\end{tcblisting}
+

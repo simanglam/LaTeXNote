@@ -1,0 +1,127 @@
+\chapter{用 Beamer 做簡報}
+
+如果想要用 \LaTeX\ 製作簡報，可以利用 beamer 這個文件類型來製作，不只可以做差一張張的靜態投影片，也可以創造出一點點的動畫效果
+
+\subsection{基礎使用}
+
+一個簡單的 beamaer 範例
+
+\begin{tcblisting}{listing only}
+\documentclass{beamer} %使用 beamer 為文件類型
+\usepackage{xeCJK}
+\setCJKmainfont{TW-Kai}
+\author{Si manglam}
+\title{如何使用 Beamer}
+\subtitle{Beamer 大作戰}
+\institute{IT 邦幫忙}
+\date{2022/09/10}
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}
+\frametitle{標題}
+\end{frame}
+\end{document}
+\end{tcblisting}
+
+\begin{itemize}
+\item frame 環境創造了新的投影片，所有要在投影片上的內容都要在這個環境內
+\item \verb`\titlepage` 自動輸出標題頁
+\item \verb`\frametitle`	為當前投影片加入標題
+\end{itemize}
+
+如果作者並不只有一個人且來自不同機構，我們需要用微調來讓投影片更美觀
+
+\begin{tcblisting}{listing only}
+\title[重大發現]{一個足以改變人類未來的重大發現}
+\author[Luke \& manglam]{Si manglam\inst{1} \and Luke\inst{2}}
+\institute[實驗室、知名大學]{\inst{1}不具名的實驗室 \and \inst{2}某間知名大學}
+\date[22xx 知名會議]{22xx/xx/xx某知名會議}
+\end{tcblisting}
+
+上面的例子中，兩個作者與兩個機構中間都用\verb`\and ` 隔開，方括號內的則是在其他地方顯示的，現在可能還看不出差別，但看到下面用 \verb`\usetheme{}` 來使用 beamer 內建主題的範例就可以看出明顯的差異了
+
+\begin{tcblisting}{listing only}
+\usetheme{Madrid}
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+\begin{frame}
+\frametitle{標題}
+\end{frame}
+\end{document}
+\end{tcblisting}
+
+可以看到這樣美觀了許多，同時方括號的內容顯示在下面那排，更多的主題可以在<連結>中找到
+
+\section{小技巧}
+
+beamer 與一般的文件一樣可以用 \verb`\tableofcontents `來建立目錄
+
+<圖片>
+
+也可以利用 \verb`\tableofcontents[currentsection]`來明確的標示現在的章節
+
+<圖片>
+
+beamer 也有針對投影片用途新定義一些環境
+
+\begin{tcblisting}{listing only}
+\begin{block}{這是一個 block}
+文字
+\end{block}
+
+\begin{alertblock}{特別注意}
+文字文字文字文字文字
+\end{alertblock}
+
+\begin{examples}
+文字文字文字文字文字
+\end{examples}
+\end{tcblisting}
+
+雖然 beamer 的主題有限，但只要換個色系就不會有人發現了
+
+\begin{tcblisting}{listing only}
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\end{tcblisting}
+
+\section{overlay}
+
+利用 \verb`\only<頁數>{}` 與 \verb`\discover<頁數>{}` 可以控制元素出現的時機，兩者差別在一個是只在特定頁數出現，一個是隱形且只會在特定頁數出現。
+
+\begin{tcblisting}{listing only}
+\begin{center}
+A\only<1>{第一頁出現}\\
+A\discover<1-2>{第一、二頁}\\
+A\only<2-3>{第二、三頁}\\
+A\discover<3>{第三頁}\\
+\end{center}
+\end{tcblisting}
+
+如果是想要讓條列的內容一條條出現可以直接在用 \verb`\begin{itemize}[<+->]`
+
+\begin{tcblisting}{listing only}
+\begin{itemize}[<+->]
+\item 一
+\item 二
+\item 三
+\end{itemize} 
+\end{tcblisting}
+
+但如果要特別指定頁數，就要在 \verb`\item `後加 <頁數>
+
+\begin{tcblisting}{listing only}
+\begin{itemize}[<+->]
+\item<1-> 一
+\item<2> 二
+\item<3-4> 三
+\item<4> 四
+\item<5> 五
+\end{itemize} 
+\end{tcblisting}
+
+可以看到有三出現在兩頁，這些就是 beamer 如何控制 Overlay。

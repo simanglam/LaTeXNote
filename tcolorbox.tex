@@ -1,0 +1,90 @@
+\chapter{tcolorbox}
+
+今天要介紹的是 tcolorbox，它提供了一個簡單的產生高度客製化 color box 的方式。
+
+\section{基礎使用}
+
+tcolorbox 提供了 tcolorbox 這個環境供我們建立 colorbox
+
+\begin{tcblisting}{listing side text}
+\begin{tcolorbox}
+This is a colored box.
+\end{tcolorbox}
+\end{tcblisting}
+
+\subsection{Style}
+
+\begin{tabular}{cc}
+參數 & 含義 \\\hline\hline
+colback & 底色 \\\hline
+colbacklower & 下半部分的底色 \\\hline
+colframe & 邊匡顏色 \\\hline
+coltitle & title 欄的底色 \\\hline
+colupper & 上半部分文字的顏色 \\\hline
+collower & 下半部分文字的顏色 \\\hline
+coltext & 文字顏色 \\\hline 
+subtitle style & title 欄的樣式 \\\hline
+boxrule & 邊匡粗細 \\\hline
+fonttitle & 標題文字的樣式 \\\hline
+fontupper & 上半部分文字的樣式 \\\hline
+fontlower & 下半部分文字的顏色 \\\hline
+\end{tabular}
+
+需要注意的是 colbacklower 需要搭配其他命令才可使用，之後會介紹到，如果想要設定一個預設值可以利用`\tcbset{}`來完成。
+
+\subsection{標題與副標題}
+
+可以用`[title=title]`為他加入標題
+
+\begin{tcblisting}{listing side text}
+\begin{tcolorbox}[title=Title]
+This is a colored box with a title.
+\end{tcolorbox}
+\end{tcblisting}
+
+也可以用`\tcbsubtitle{Subtitle}`來插入副標題
+
+\begin{tcblisting}{listing side text}
+\begin{tcolorbox}[title=Title]
+This is a colored box with a title.
+\tcbsubtitle{Subtitle}
+And subtitle.
+\end{tcolorbox}
+\end{tcblisting}
+
+\subsection{上下分段}
+
+如果你想要將一個 box 分成兩段可以利用 \verb`\tcblower`
+
+\begin{tcblisting}{listing side text}
+\begin{tcolorbox}
+Upper Box
+\tcblower
+Lower Box
+\end{tcolorbox}
+\end{tcblisting}
+
+這樣預設會是上下兩段，可以利用 sidebyside 改成左右各佔一半
+
+\begin{tcblisting}{listing side text}
+\begin{tcolorbox}[sidebyside]
+Upper Box
+\tcblower
+Lower Box
+\end{tcolorbox}
+\end{tcblisting}
+
+\subsection{更多}
+
+但 tcolorbox 可不只有這樣，你可以利用 \verb`\tcbuselibrary{}` 去調用一些延伸功能，例如調用 skin 可以讓上下兩段的顏色分開設定
+
+\begin{tcblisting}{listing side text}
+%\tcbuselibrary{skins}
+\begin{tcolorbox}[skin=bicolor, sidebyside, colback=gray!30!white,colbacklower=gray!5!white]
+Bicolor
+\tcblower
+Bicolor
+\end{tcolorbox}
+\end{tcblisting}
+
+當然除了上述的技巧之外，tcolorbox 還有許多用處我沒有講到，如果想要好好的研究可以參考他的使用手冊<連結>。

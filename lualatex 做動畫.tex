@@ -1,0 +1,46 @@
+\chapter{LuaLaTeX 做動畫}
+
+繼上一篇介紹了 Lua\LaTeX 後，相信大家都瞭解了 Lua\LaTeX 的基本使用方式，今天要教大家的則是如何用 Lua\LaTeX 加上 animate 製作動畫，特別提醒：這不是正常的 Lua\LaTeX 的使用方法。
+
+\section{基礎創作}
+
+基本上最常使用到的環境大概是物件的移動，我們不太可能一幀幀的繪製出物件的移動軌跡，因為那樣程式碼會顯得過於冗長，所以我們可以利用 for 迴圈去縮減程式碼。
+
+\begin{tcblisting}{listing only}
+\begin{luacode}
+tex.sprint("\\begin{animateinline}[autoplay,loop]{10}")
+for x = -4,4,0.1 do
+	tex.sprint("\\begin{tikzpicture}")
+	tex.sprint("\\draw[color=white] (-5,-5) rectangle (5,5);")
+	tex.sprint("\\draw[fill=black] (".. x ..",0) circle (0.5);")
+	tex.sprint("\\end{tikzpicture}")
+	tex.sprint("\\newframe")
+end
+tex.sprint("\\end{animateinline}")
+\end{luacode}
+\end{tcblisting}
+
+編譯出來的動畫是一個小球漸漸的從左移到右，比起一幀幀繪製，這樣簡單多了。
+
+\section{進階創作}
+
+更進階的創作用法可以再加上 if 迴圈，例如以下的動畫：
+
+\begin{tcblisting}{listing only}
+\begin{luacode}
+tex.sprint("\\begin{animateinline}[autoplay,loop]{10}")
+for x = 0,360,5 do
+	tex.sprint("\\begin{tikzpicture}")
+	tex.sprint("\\draw[color=white] (-2,-2) rectangle (2,2);")
+	if (math.sin(math.rad(x)) > 0) then
+		tex.sprint("\\draw[fill=red] (0,".. math.sin(math.rad(x)) ..") circle (0.5);")
+	else
+		tex.sprint("\\draw[fill=blue] (0,".. math.sin(math.rad(x)) ..") circle (0.5);")
+	tex.sprint("\\end{tikzpicture}")
+	tex.sprint("\\newframe")
+end
+tex.sprint("\\end{animateinline}")
+\end{luacode}
+\end{tcblisting}
+
+編譯出的結果是一個會隨著高度變換顏色的小球，更多的使用方法就要靠你們自己去發想了，只要是有規律地動會，都可以用這種方式繪製出來的。

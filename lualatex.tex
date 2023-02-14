@@ -1,0 +1,60 @@
+\chapter{lualatex}
+
+Lua\LaTeX 是將 Lua 與 \TeX\ 結合在一起，讓改動 \TeX\ 的排版規則時可以不用 \TeX ing，更詳細的使用需要對 Lua\TeX 與 \LaTeX\ 有深刻的認識，目前我的能力還不到這麼深厚，所以我只介紹一些基礎的用法。
+
+\section{基礎用法}
+
+想要在 Lua\LaTeX 裡使用 Lua 需要透過 \verb`\directlua{}` 的協助，這個命令會將花括號中命令轉給 Lua 解釋器，要想讓 Lua 產出的結果可以轉回給 \LaTeX 需要用 \verb``tex.sprint`。
+
+\begin{tcblisting}{listing only}
+tex.sprint("$\cos(0)$等於".. math.cos(math.rad(0)))
+\end{tcblisting}
+
+執行之後可以看到 $\cos$ 被輸出出來了，這就是基礎的 Lua\LaTeX 的用法更進階的也可以將 for 迴圈帶入使用
+
+\begin{tcblisting}{listing only}
+\directlua{
+tex.sprint("\\begin{tabular}{|c|c|c|}")
+tex.sprint("\\hline")
+tex.sprint("x & sin(x) & cos(x) \\\\ ")
+tex.sprint("\\hline")
+for x = 0,180,10 do
+	tex.sprint(x .." & ".. math.sin(math.rad(x)) .." & ".. math.cos(math.rad(x)) .." \\\\ ")
+	tex.sprint("\\hline")
+end
+tex.sprint("\\end{tabular}")
+}
+\end{tcblisting}
+
+執行後可以看到有表格被產出了，如果有什麼重複性高的指令，也可以用這種方式來節省時間，這是基礎的 Lua\LaTeX 的使用方法。
+
+\section{進階使用}
+
+進階使用我也不會所以在這裡放一個我看到的例子：
+
+\begin{tcblisting}{listing only}
+function fadelines(head)
+        GLYPH = node.id("glyph")
+        WHAT = node.id("whatsit")
+        COL = node.subtype("pdf_colorstack")
+        colorize = node.new(WHAT,COL)
+        cvalue = 0
+        for line in node.traverse_id(GLYPH,head) do
+            colorize.data = cvalue.." "..1 - cvalue.." .5".." rg"
+            node.insert_before(head, line, node.copy(colorize))
+            cvalue = math.min(cvalue + .0008, 1)
+        end
+        return head
+    end
+
+    luatexbase.add_to_callback("pre_linebreak_filter", fadelines, "fadelines")
+\end{tcblisting}
+
+這樣產生的結果如下圖：
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.75\textwidth]{sampla.pdf}
+\end{figure}
+
+要達成這種效果，需要對 Lua\LaTeX 以及 \LaTeX 有著即為深厚的認識。

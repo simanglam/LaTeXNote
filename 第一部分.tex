@@ -1,0 +1,641 @@
+\chapter{\LaTeX\ 簡介}
+
+在第一章時，我們簡單的介紹了 \LaTeX\ 的歷史，而這一章是要介紹 \LaTeX\ 的基礎背景知識，讓大家可以快速理解 \LaTeX\ 的分支們，並且可以依照自己的需求選擇最適合的分支。
+
+\section{編譯引擎與格式}
+
+\LaTeX\ 可以拆成兩個部分，一個是編譯引擎(Engine）一個是格式，格式在 \LaTeX\ 裡有介紹到，裡面將基本命令封裝成高級命令，且負責描述排版細節，而編譯引擎則是負責將這些排版細節轉成 PDF 的工作。
+
+\subsection{編譯引擎}
+
+編譯引擎是 \LaTeX\ 的基礎，因為格式是建立於編譯引擎所提供的基本命令上的，下表是一些編譯引擎，這些編譯引擎各有自己的特點：
+
+\begin{itemize}
+\item \TeX
+\item pdf\TeX
+\item \XeTeX
+\item Lua\TeX
+\item p\TeX \& up\TeX
+\end{itemize}
+
+\subsubsection{\TeX}
+
+由高德納教授發明的，是目前所有編譯引擎的基礎，但只支持 ASCII 編碼，所以 CJK 文字無法利用 \TeX\ 來排版，並且只能輸出 .dvi 檔，還需使用 dvipdf 將其轉換成 PDF 檔。
+
+\subsubsection{pdf\TeX}
+
+一開始 \TeX\ 只能產生 dvi 檔，如果需要 pdf 檔得使用 dvips + ps2pdf 或 dvipdf 等，用久了難免會覺的不方便，於是就有人對 \TeX\ 進行了改進，使 \TeX\ 能夠直接的產生 Pdf 檔，而這改進過的引擎就被命名為 pdf\TeX 。
+
+\subsubsection{\XeTeX} 
+
+隨著時代的進步，\TeX\ 並沒有消逝在歷史的洪流中，但對於日新月異的電腦科學來說，\TeX\ 所支持的字體技術及編碼過於的老舊，於是便開發了支持 Opentype, Truetype, Unicode 的 \XeTeX ，並可以直接調用系統字體。
+
+\subsubsection{Lua\TeX}
+
+後來有人希望可以在撰寫新的特性時可以不用寫死，於是就將 Lua 加進了 pdf\TeX\ 裏成為了 Lua\TeX ，Lua\TeX\ 可在文章中直接使用 Lua 來改變排版細節，也支持 Unicode 編碼及現代的字型技術。
+
+\subsubsection{p\TeX \& up\TeX}
+
+這算是一個比較特殊的分枝，在 \TeX\ 傳入日本後，因為 \TeX\ 本身不支持非拉丁語系的文字，於是日本人便將 \TeX\ 依照自己的需求改進，最終的產物就是原生支持日文的 p\TeX\ （但只支持特定編碼，up\TeX\ 才支持 unicode 編碼），除了原生支持日文外也支持豎排文章。
+
+由於 \TeX 龐大且複雜的家族，在之後的篇幅中 \LaTeX 皆指 \XeTeX 與 \LaTeX 的組合，若用了其他不同的編譯引擎，一率會以 XX\LaTeX 表示。
+
+\section{發行版}
+
+TeX 發行版可以說是將編譯引擎、格式與 Pacakge 都集中到一起的集合，通常我們不會單獨下載編譯引擎與格式，而是會直接下載發行版。我所知發行版有以下三種。
+
+\begin{itemize}
+\item TeX Live
+\item MiKTeX
+\item MacTeX
+\end{itemize}
+
+\subsection{TeX Live}
+
+由 TUG（\TeX\ User Group）維護的發行版，可以說是目前最活躍的 \TeX\ 發行版，但我並不是使用這個發行版，關於使用方法可以參考使用手冊 \url{https://tug.org/texlive/doc.html}。
+
+\subsection{MiKTeX}
+
+MiKTeX 的設計理念是夠用就好（Just Enough \TeX ），一開始安裝時只需要下載基本的 Package 即可，隨後如果有缺失的 Package 便會在編譯時下載，如果你不想裝龐大的 \TeX\ 發行版可以考慮這個。
+
+\subsection{MacTeX}
+
+MacTeX 實際上是對 TeX Live 進行改造，加入許多對於 MacOS 系統的優化，適合想在 MacOS 上使用 \TeX\ 卻又不想搗鼓太多的人。
+
+\section{編輯器}
+
+編輯器說穿了就是文本編輯器，如果你對於 \LaTeX\ 非常熟悉，不用下載特別的編輯器也可以進行 \LaTeX\ 的撰寫。不過想當然的，專門為 \LaTeX\ 開發的編譯器一定能讓你事半功倍。
+
+\subsection{texmaker}
+
+texmaker 是我目前使用的編輯器，他是專門為 \LaTeX\ 開發的自由軟體，所以他對 \LaTeX\ 的支持相當的好，不只有自動補全命令，還可以整理出 \LaTeX\ 編譯過程中的問題，讓你可以一邊查看原始碼一邊查看問題。
+
+\subsection{Vim \& Emacs}
+
+如果你是這兩個編輯器的愛好者，你也可以選擇使用這兩個編輯器，由於我並不是這兩個編輯器的使用者，所以我無法在這兩個編輯器上給出建議。
+
+\subsection{VS Code}
+
+若你本身有在使用 VS Code，那麼使用 VS Code 編譯 \LaTeX 也是一個可行的方案，但與 Vim \& Emacs 一樣，由於我並沒有在使用，所以你需要自行摸索。
+
+當然，你還有成千上萬的其他選項，只不過礙於篇幅無法一一寫出。
+
+\section{Hello World!}
+
+同學習其他程式語言一樣，第一步要做的便是學習 Hello World，在 \LaTeX\ 中一個最精簡的 Hello World 程式如下：
+
+\begin{tcblisting}{listing only}
+\documentclass{article}
+\begin{document}
+Hello World!
+\end{document}
+\end{tcblisting}
+
+接者使用 pdf\LaTeX, \XeLaTeX\ 或 Lua\LaTeX\ 編譯，再點開 Hello World.pdf 即可，編譯完後你會發現多出了許多副檔名不同的檔案，這些檔案在 \LaTeX\ 的編譯過程中都有重要的工作，會在後面的章節詳細解說。
+
+\section{保留字符}
+下表為 \LaTeX\ 中的保留字符：
+
+\begin{small}
+\begin{tabular}{llll}
+\hline
+保留字符 & 用途 & 文檔中使用 & 替代指令 \\\hline\hline
+\verb|\| & 所有命令的開頭 & \verb|$\backslash$| & \textbackslash \\\hline
+\{ & 開始一個分組 & \verb|\{| & \verb|\textbraceleft| \\\hline
+\} & 結束一個分組 & \verb|\}| & \verb|\textbraceright| \\\hline
+\$ & 進入數學模式 & \verb|\$| & \verb|\textdollar| \\\hline
+\% & 下註解 & \% & NA  \\\hline
+\# & 定義巨集 & \# & NA \\\hline
+\& & 表格中的換格標示 & \verb|\&|  & NA \\\hline
+\verb|_| & 數學模式下產生下標字 & NA & \verb|\_| \\
+\hline
+\verb|^| & 數學模式下產生下標字 & NA & \verb|\&| \\\hline
+\verb|~| & 產生一個空白（禁止斷行） & NA & \verb|\textasciitilde| \\\hline
+\end{tabular}
+\end{small}
+
+大部分的保留字符都可以藉由加一個反斜槓的方式輸出，但唯有反斜槓不行（單個反斜槓是產生空白、兩個反斜槓加在一起是強制換行）只能使用指令 \verb|\textbackslash| 來輸出。
+
+\section{命令與環境}
+
+\LaTeX 中有兩個很重要的概念「命令與環境」，在使用 \LaTeX 的過程中，我們會不斷的利用這兩個東西來調整排版細節。命令為由反斜槓開頭的一系列英文字母組成，環境則是指由\verb|\begin{環境}| ......\verb|\end{環境}| 包起來的區塊。
+
+%\begin{tcblisting}{sidebyside}
+%以下兩種方式在編譯後都會得到一樣的結果
+%{\large 放大}
+%\begin{large}放大\end{large}
+%\end{tcblisting}
+
+\subsection{分組}
+
+分組是 LaTeX 中的一個概念，可以將其類比為一個 HTML 的 \verb|<p>| 標籤，通常用來限定命令的作用範圍，使用方式也很簡單，就是將想讓命令作用的範圍用\{包起來即可\}，範例如下：
+
+\begin{tcblisting}{sidebyside}
+%\large 更改字型大小
+{\large A}A
+\end{tcblisting}
+
+\subsection{假空白}
+
+LaTeX 的命令有可分為兩種有參數與沒參數的，通常可選參數會被 \verb|[]| 包圍起來並置於被 \verb|{}| 包圍起來的的必選參數前。前面提到命令只會在遇到數字、保留字符或空白才會被視為一個整體，這就會導致一個問題，像 \verb`\LaTeX` 這樣沒有必選參數的命令後面必須要接一個空白，但這個空白會被 \LaTeX 忽略掉，可以用以下兩種方法來解決這個問題。
+
+\begin{tcblisting}{sidebyside}
+\LaTeX and Something. %空格被忽略
+
+\LaTeX{} and Something.%在命令後接花括號
+
+\LaTeX\ and Something.%在命令之後接反斜槓
+\end{tcblisting}
+
+\section{Preamble}
+
+Preamble 指的是檔案內 \verb|\begin{document}| 前的部分，通常我們會在這裡引入需要的 package、選擇文件的類別、定義一些需要的參數、命令，你可以簡單的理解為定義模板，或理解為 HTML 的 \verb|<head>| 標籤內的事物。
+
+\begin{tcblisting}{listing only}
+%Preamble
+\begin{document}
+%文本區
+\end{document}
+\end{tcblisting}
+
+如同 HTML 需要在 head 開頭指定 doc type，\LaTeX 也需要在 Preamble 的開頭指定文件類型，文件類型是 \LaTeX 根據不同類型的排版需求而發展出的記錄排版細節的檔案，\LaTeX 本身內建的文件類型如下表：
+
+\begin{tabular}{cc}
+\hline
+文件類別 & 用途 \\\hline\hline
+article & 短文章 \\\hline
+report & 多章節的長報告 \\\hline
+book & 書籍 \\\hline
+beamer & 簡報 \\\hline
+\end{tabular}
+
+在 Preamble 中用\verb|\documentclass{文件類型}| 指定完文件類型後就可以正式開始撰寫內容了。
+
+\section{標題與目錄}
+
+在上文中提到的文件類型中已有預先定義好的標題格式，與所見即所得的文書編輯軟體不同的是，一般在設定標題時需要從樣式開始下手，但在\LaTeX 中，樣式與內容是分開的，所以在 \LaTeX 只需使用命令將標題標記起來即可：
+
+\begin{tcblisting}{listing only}
+\chapter{章}
+\section{小節}
+\end{tcblisting}
+
+在 \LaTeX 預先定義好的文件類型裡有以下幾種被預先定義好的標題樣式：
+
+\begin{tabular}{ccc}
+\hline
+名稱|說明|深度 \\\hline\hline
+\verb|\part{}| & 部 & -1 （在 article 為 0）\\\hline
+\verb|\chapter{}| & 章 & 0（在 article 中未被定義）\\\hline
+\verb|\section{}| & 節 & 1 \\\hline
+\verb|\subsection{}| & 小節 & 2 \\\hline
+\verb|\subsubsection{}| & 小小節 & 3 \\\hline|
+\verb|\paragraph{}| & 段 & 4 \\\hline
+\verb|\subparagraph{}| & 小段 & 5 \\\hline
+\end{tabular}
+
+深度在 \LaTeX\ 文件類型的定義中是用來決定會不會被 \verb|\tableofcontent| 編入目錄的，以下有一些有關的指令：
+
+\begin{tcblisting}{listing only}
+\setcounter{tocdepth}{2}%設定深度
+\section*{}%只要加一個星號就會不編號也不編入目錄
+\addcontentsline{toc/lof/lot}{層級}{名稱}%將未編入目錄的標題標入目錄
+\end{tcblisting}
+
+需要注意在 \verb|\addcontentsline| 後的 toc, lof, lot 分別代表了目錄、圖目錄、表目錄，圖目錄與表目錄分別可被 \verb|\listoffigures| 與 \verb|\listoftables| 給列印出來。
+
+\section{處理錯誤}
+
+LaTeX 的錯誤有下列三種
+
+\begin{itemize}
+\item warning
+\item badbox
+\item error
+\end{itemize}
+
+第一種是 warning 代表發生了錯誤但並不影響、或不太影響排版結果的問題上，通常這種回去翻 log 檔都會有一些建議，不過不解決也不會什麼大事情發生。
+
+badbox 是 \LaTeX\ 的一個特殊的錯誤類型，這個錯誤類型是來自於 \LaTeX\ 認為排版產出的結果不美觀，而給出的警告，在這類的警告後面通常還會有 badness 來描述到底有多糟糕。
+
+error 則與 warning 相反，其足以使編譯過程停止或導致奇怪的結果，遇到這種問題建議直接向他人詢問，並請附上原始檔與 log 檔的紀錄，以便他人快速釐清問題所在。
+
+\chapter{中文環境配置}
+
+專為英文排版開發的 \LaTeX\ 在面對拉丁語系時都有不錯的表現，可是 \LaTeX 看不懂中文，無法直接利用 \LaTeX 進行中文排版，且當 \LaTeX\ 遇到與拉丁語系相差許多的語言時，\LaTeX 還是會依據拉丁語系的排版規則來排版，這會造成結果不盡人意，這一篇就是要教大家如何解決這個問題。
+
+\section{前置作業}
+
+在開始建構中文環境之前，我們需要先探討為什麼 \LaTeX 無法直接排版中文，這個問題可以分成兩個部分來回答，第一是因為原始的\TeX 本身只能處理 ASCII 編碼，無法處理其他類型的編碼檔案，第二是因為 \LaTeX 並沒有預設中文字型，所以即使可以處理編碼問題，一樣沒有字型可以堪入文件中。
+
+解決方法也很簡單，現代的編譯引擎（LuaTeX \& XeTeX）都可以處理 UTF-8 編碼的檔案了，並解他們也與現代的字體技術相容，可以直接使用 TrueType 或 OpenType 的字體。
+
+\section{中文字型導入}
+
+要在 LaTeX 中導入字體可以借助 fontspec 的幫助：
+
+\begin{tcblisting}{listing only}
+%\usepackage{fontspec}
+\newfont{switch}{字體名稱}
+\end{tcblisting}
+
+在上面的範例中 switch 是用來在文章中改變字體的命令，而字體的名稱則需要使用者自行查詢，可以利用\verb|fc-list > fontlist.txt| 將電腦中可用的字體列表輸出至 fontlist.txt 中，或也可以將字體檔案直接放在同一工作目錄下來使用它。
+
+到了這個階段基本上已經可以使用中文，但你會發現有許多排版細節都不盡人意，所以我們會需要導入額外的 package 來解決這個問題，因為本書是基於 \XeLaTeX 的，所以在這裡會介紹 xeCJK 這個 package。
+
+在 xeCJK 中可以將中英字體分開定義，另外他也可以將不同字型的字體分開設定：
+
+\begin{tcblisting}{listing only}
+\usepackage{xeCJK}
+\setCJKmainfont[可選參數]{字體名}%設置主要字體
+\setCJKfallbackfont[可選參數]{字體名}%設置備用字體
+\newCJKfontfamily\switch[可選參數]{字族名}%定義新的字族
+\end{tcblisting}
+
+在實際的使用中，可以利用上面範例中的，這些命令來調整中文排版字型的細節。
+\section{字型}
+
+\subsection{字體大小}
+
+\LaTeX\ 預設內文字體是 10pt 並提供了 11 \& 12 pt 可供使用，並且 \LaTeX\ 有預設一些字體大小
+
+\begin{tabular}{ccccc}
+\hline
+環境 & swich & 10pt & 11pt & 12pt \\\hline\hline
+\verb|\begin{tiny}| & \verb|\tiny|  & 5pt & 6pt & 6pt \\\hline
+\verb|\begin{scriptsize}| & \verb|\scriptsize| & 7pt & 8pt & 8pt \\\hline
+\verb|\begin{footnotesize}| & \verb|\footnotesize| & 8pt & 9pt & 10pt \\\hline
+\verb|\begin{small}| & \verb|\small| & 9pt & 10pt & 11pt \\\hline
+預設大小 & \verb|\normalsize| & 10pt & 11pt & 12pt \\\hline
+\verb|\begin{large}| & \verb|\large| & 12pt & 12pt & 14pt \\\hline
+\verb|\begin{Large}| & \verb|\Large| & 14pt & 14pt & 17pt \\\hline
+\verb|\begin{LARGE}| & \verb|\LARGE| & 17pt & 17pt & 20pt \\\hline
+\verb|\begin{huge}| & \verb|\huge| & 20pt & 20pt & 25pt \\\hline
+\verb|\begin{Huge}| & \verb|\Huge| & 25pt & 25pt & 25pt \\\hline
+\end{tabular}
+
+如果想要使用特殊的字體大小可利用 \verb|\fontsize{font size}{line skip}| 來宣告特殊的字號，要注意的是在這個命令後需要補上\verb|\selectfont| 使用宣告的字號。
+
+
+\subsection{粗體與斜體}
+
+在英文中利用粗體與斜體是標示重點的常用做法，而在中文中通常不會使用斜體來標示重點，所以若沒有經過適當的設定便直接使用 \LaTeX 中的命令會造成結果不符合中文排版的習慣，想要解決這個問題需要另用以下這兩個命令來解決：
+
+\begin{itemize}
+\item \verb|\setCJKsansfont{字體名稱}|
+\item \verb|\setCJKmonofont{字體名稱}|
+\end{itemize}
+
+這兩個命令分別是用來單獨設定中文斜體與等寬字體，他們的用法與\verb|\setCJKmainfont|相同。粗體相較起來就需要用不同的方法去設定，設定的方法並不是利用命令而是利用可選參數，形體與等寬字體也可以用同種方式設定，只不過使用選參數設定的粗體與斜體會被視為只在使用該字族時有效。
+
+\begin{tcblisting}{}
+%\setCJKmainfont[
+%BoldFont =王漢宗特黑體繁,
+%ItalicFont = 王漢宗中行書繁
+%BoldItalicFont = 王漢宗綜藝體繁]{王漢宗特明體繁}
+%設定字體
+一般的字體，\textbf{這是粗體}\textit{這是斜體}\textbf{\textit{這是斜體加粗體}}
+\end{tcblisting}
+
+\chapter{版面配置}
+
+在處理完字體之後就進到書籍的版面配置，想要排版結果賞心悅目並有自己的風格，那麼這章節是必不可跳過的一章，在這章內會解說 \LaTeX 版面配置的運作原理，另外也會針對文繞圖進行說明。
+
+\section{一些內建的處理}
+
+\LaTeX 內建的文件類別中便有一些預先定義好的選項可供選擇：
+
+\begin{tabular}{cc}
+\hline
+選項 & 含義 \\\hline\hline
+a4paper & 設定紙張大小為a4 \\\hline
+a5paper & 設定紙張大小為a5 \\\hline
+twoside & 雙面模式 \\\hline
+twocolumn & 雙欄模式 \\\hline
+landscape & 將紙張旋轉90度 \\\hline
+\end{tabular}
+
+\section{邊界}
+
+邊界可以利用 geometry package 來設定
+
+\begin{tcblisting}{listing only}
+\usepackage[key1=value, key2=value]{geometry}
+or
+\usepackage{geometry}
+\geometry{key1=value, key2=value}
+\end{tcblisting}
+
+下表有一些常用的 key
+
+\begin{tabular}{cc}
+\hline
+Key & 含義 \\\hline\hline
+top & 上邊界 \\\hline
+bottom & 下邊界 \\\hline
+left & 左邊界 \\\hline
+right & 右邊界 \\\hline
+outter & 雙頁模式下的右側邊界 \\\hline
+inner & 雙頁模式下的右側邊界 \\\hline
+\end{tabular}
+
+\section{參數}
+
+在\LaTeX\ 中段落的位置是由許多不同的參數相互制衡而得出的，這些參數有的決定單詞與單詞間的距離、有些決定端落雨段落之間的距離，正是多虧了這些參數我們才可以利用 \LaTeX 排版出如此優美的結果，要調整這些參數皆需使用 \verb|\setlength{參數}{數值}| 進行調整，以下是這裡要介紹的參數：
+
+\begin{table}[hbt]
+\begin{tabular}{|c|c|}
+\hline
+參數 & 含義
+\\\hline\hline
+paperheight & 紙張寬度
+\\\hline
+paperwidh & 紙張長度
+\\\hline
+parskip & 段落之間的距離
+\\\hline
+parindent & 段落前的縮排
+\\\hline
+baselineskip & 行距相關
+\\\hline
+lineskip & 行距相關
+\\\hline
+\end{tabular}
+\caption{版面配置相關的參數}
+\label{tab:layout}
+\end{table}
+
+上表所示便是這些參數的功用。唯需要注意由於 \LaTeX 會將 chapter 後的第一段落視為引言，而在被視為引言的段落是不會有縮排的，所以若是發現 chapter 後的第一章節沒有縮排，請不要慌張，這時可以使用indentfirst 這個 package 來解決。
+
+\section{行距}
+
+由於行距在 \LaTeX 中很複雜，所以在這裡特別拉出一個小節講解，baselineskip 是指兩行字基線的距離，是透過 $\text{font size} \times 1.2 \times \text{linespread\{value\}}$ 得出的，若要在文本區內更改，需要使用 \verb|\selectfont| 命令。
+
+\linespread{1}\selectfont
+\begin{tcolorbox}
+{\setlength{\baselineskip}{12pt}\selectfont
+AAAAAA\\
+AAAAAA\\}
+{\setlength{\baselineskip}{24pt}\selectfont
+AAAAAA\\
+AAAAAA\\}
+\end{tcolorbox}
+\linespread{1.5}\selectfont
+
+lineskip 則是在上下兩條基線超過 baselineskip 時兩行之間的距離，如果要調整行距，建議使用 setspace package 提供的 \verb|\singlespacing| \verb|\onehalfspacing| \verb|\doublespacing| 命令，或者利用 \verb|\linespread{vaule}| 設定行距。
+
+\section{頁首、頁尾}
+
+頁首頁尾可以藉由 fancyhdr 這個 package 來自定義，它提供了 fancyhead 與fancyfoot 與一些可選參數來協助我們定義頁首與頁尾。
+
+\begin{tcblisting}{listing only}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L,C,R]{ }%將頁首頁尾清空
+\fancyfoot[L,C,R]{ }
+\fancyhead[L]{書籍名稱}%將書籍名稱放在左頁首
+\fancyhead[R]{\thepage}%將頁碼放在右頁首
+\renewcommand{\headrulewidth}{0.4pt}%調整頁首下的橫線寬度
+\end{tcblisting}
+
+上面是一個簡單的範例，\verb|\fancyhead| 是調整頁首，\verb|\fancyfoot| 是調整頁尾，可選參數L, C, R 分別代表了左中右三個位置，而除了這三個參數外，我們還可以利用 O, E 這兩個參數來為奇數與偶數頁定義不同的頁首與頁尾：
+
+\begin{tcblisting}{listing only}
+\pagestyle{fancy}
+\fancyhead[L,C,R]{ }%將頁首頁尾清空
+\fancyfoot[L,C,R]{ }
+\fancyhead[LO,RE]{書籍名稱}
+\fancyhead[RO,LE]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}%調整頁首下的橫線寬度
+\end{tcblisting}
+
+上面的範例將頁碼放在靠近書封的頁首，將書籍名稱放在遠離書封的頁首。我們還可以直接定義出一個 pagestyle 以在不同的情況使用：
+
+\begin{tcblisting}{listing only}
+\fancypagestyle{name}{%定義新的 pagestyle
+\fancyhead[L,C,R]{ }
+\fancyfoot[L,C,R]{ }
+\fancyhead[LO,RE]{書籍名稱}
+\fancyhead[RO,LE]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+}
+\pagestyle{name}%使用新的 pagestyle
+\end{tcblisting}
+
+\section{列表}
+
+在 \LaTeX\ 中有三種不同的列表環境， 分別是 itemize, enumerate 與 description，這三個在使用上除了輸出結果不同外，使用方式是完全相同的。Itemize 是最簡單的列表環境，只要在需要項目符號的地方放上 \verb|\item| 即可創造出一個項目符號，若想更改項目符號也可以利用在 item 後利用 [項目符號] 的方式自訂。
+
+\begin{tcblisting}{}
+\begin{itemize}
+\item 項目符號
+\item[*] 自訂的項目符號 
+\end{itemize}
+\end{tcblisting}
+
+若想要的輸出是帶有順序的，可以使用 enumerate 環境試試看，enumerate 環境預設的項目符號是編號，若有需要想要細分某一項目也可以再次使用 enumerate 環境。
+
+\begin{tcblisting}{}
+\begin{enumerate}
+\item 第 1 點
+\begin{enumerate}
+\item 第 1-1 點
+\item 第 1-2 點
+\item 第 1-3 點
+\end{enumerate}
+\item 第 2 點
+\end{enumerate}
+\end{tcblisting}
+
+
+\chapter{圖片與表格}
+
+\LaTeX\ 本身是不能處理圖片的，所以我們需要借用 graphicx 來讓 \LaTeX\ 處理圖片，其實還有另一個可以處理圖片的 package 叫 graphics ，他們兩個像是同一個 package 但用著不同的 interface ，兩個除了可選參數的形式之外，不論是命令還是必選參數都一樣。在這裡介紹的是 graphicx ，如果想要使用 graphics 請參考說明文件。
+
+\section{表格}
+
+想要在 \LaTeX\ 中使用表格需要利用 tabular 環境
+
+\begin{tcblisting}{listing side text}
+\begin{tabular}{| c | l r |}
+\hline
+第一欄 & 第二欄 & 第三欄 \\
+\hline
+\end{tabular}
+\end{tcblisting}
+
+\begin{itemize}
+\item 在 \verb|\begin{tabular}| 後的花括號中指定的是欄位及對齊方式，| 是代表在這兩欄之間要有分隔線，c, l, r 分別代表置中、置左、置右對齊
+\item \verb|\hline| 是讓 LaTeX 畫一條橫線
+\item \& 是跳到下一欄的的符號
+\item \verb|\\| 是告訴 LaTeX 這一行結束了，要跳到下一行。
+\end{itemize}
+
+如果想指定欄寬可以用 p\{寬度\} 的方式，但在這種情況下預設是置左對齊
+
+\begin{tcblisting}{listing side text}
+\begin{tabular}{|p{1cm}|p{2cm}|}
+\hline
+一公分 & 兩公分 \\
+\hline
+\end{tabular}
+\end{tcblisting}
+
+但要直接這樣使用會有許多問題，所以我們要將表格放進 table 環境內，原因是在下一篇有提到的浮動體
+
+\begin{tcblisting}{listing only}
+\begin{table}
+\begin{tabular}{| c | l r |}
+\hline
+第一欄 & 第二欄 & 第三欄 \\
+\hline
+\end{tabular}
+\end{table}
+\end{tcblisting}
+
+\section{基礎}
+
+只要使用\verb|\includegraphics{檔案}|就可以將圖片導入文件中了
+
+\begin{tcblisting}{listing side text}
+\includegraphics[scale=0.25, draft]{test.png}
+\end{tcblisting}
+
+但這樣會有一個問題，如果今天圖片與 tex 檔不在同一層目錄下就找不到，圖片少的時候還好，但只要圖片一多再加上 \LaTeX\ 編譯時產生的中間文件就足以將你淹沒在茫茫檔案之中，萬幸的是可以利用\verb|\graphicspath{目錄}|來指定圖片檔案的位置。
+
+\begin{tcblisting}{listing only}
+\graphicspath{{jpg/}{png/}}
+\end{tcblisting}
+
+這樣 \LaTeX\ 就會自動搜尋 jpg 跟 png 的子目錄了，你可以利用以下的可選參數來調整圖片
+
+\begin{tabular}{cc}
+\hline
+參數 & 含義 \\\hline\hline
+scale & 圖片縮放 \\\hline
+width & 圖片寬度 \\\hline
+height & 圖片高度 \\\hline
+page & 如果是插入多頁pdf，要插入第幾頁 \\\hline
+draft & 啟動草稿模式 \\\hline
+\end{tabular}
+
+\begin{tcblisting}{listing side text}
+\includegraphics[scale=0.05, draft]{test.png}\\
+\includegraphics[scale=0.15, draft]{test.png}\\
+\includegraphics[scale=0.25, draft]{test.png}\\
+\includegraphics[scale=0.25, draft]{test.png}
+\end{tcblisting}
+
+\subsection{其他使用}
+
+除了圖片外 graphicx 也提供了以下指令
+
+\begin{itemize}
+\item \verb|\rotatebox{角度}{文字}|
+\item \verb|\scalebox{水平縮放}[垂直縮放]{文字}|
+\item \verb|\reflectbox{文字}|
+\end{itemize}
+
+\begin{tcblisting}{listing side text}
+\rotatebox{0}{文字}\\
+\rotatebox{90}{文字}\\
+\rotatebox{180}{文字}\\
+\rotatebox{270}{文字}\\
+\end{tcblisting}
+
+第一個 \verb|\rotate{}{}| 顧名思義就是旋轉文字，第二個 \verb|\scalebox{}[]{}| 可以將文字做兩個不同方向的縮放，第三個 \verb|\reflectbox{}|則是讓文字左右翻轉，實際上可以看成 \verb|\scalebox{-1}[1]{文字}|的簡寫
+
+\begin{tcblisting}{listing side text}
+\scalebox{1}[1]{文字}\\
+\scalebox{2}[1]{文字}\\
+\scalebox{1}[2]{文字}\\
+\scalebox{2}[2]{文字}\\
+\scalebox{-1}[1]{文字}\\
+\reflectbox{文字}
+\end{tcblisting}
+
+\section{浮動體環境}
+
+按著以上的方式用了一段時間後，你可能會發現這樣產出的結果並不好看，這時只要將圖片放進 figure 環境即可，\LaTeX\ 就會自動幫挑選好位置插入圖片了
+
+\begin{tcblisting}{listing only}
+\begin{figure}
+\includegraphics[scale=0.5]{test.png}
+\end{figure}
+\end{tcblisting}
+
+你會發現插入圖片的位置跟程式碼的位置不太一樣，這是因為 \LaTeX\ 會自動決定他認為好看的位置，而不是我們想要的位置，這時候可以在 \verb|\begin{figure}[]|後的方括號加入參數
+
+\begin{tabular}{cc}
+參數  & 含義 \\\hline\hline
+ h  & 將圖片放在這裡（不一定跟程式碼一樣，但會相近） \\\hline
+ t  & 放在頁面頂部 \\\hline
+ b  & 放在頁面底部 \\\hline
+ p  & 為圖片單獨開一頁 \\\hline
+ !  & 覆蓋 LaTeX 預設用來決定「好」位置的參數 \\\hline
+\end{tabular}
+
+\begin{tcblisting}{listing only}
+\begin{figure}[h]
+\includegraphics[scale=0.5]{test.png}
+\end{figure}
+\end{tcblisting}
+
+\subsection{文繞圖}
+
+如果你想要達成文繞圖的效果，需要借助 wrapfig package 提供的 wrapfig 環境：
+
+\begin{tcblisting}{listing only}
+%\begin{wrapfigure}{位置}{寬度}
+\begin{wrapfigure}{r}{6cm}
+\includegraphics[width=5.5cm]{test.png}
+\end{wrapfigure}
+\end{tcblisting}
+
+下表是可以使用的位置
+
+\begin{tabular}{cc}
+\hline
+參數 & 含義 \\\hline\hline
+ r  & 靠右側 \\\hline
+ l  & 靠左側 \\\hline
+ i  & 雙面模式下靠書封 \\\hline
+ o  & 雙面模式下靠書的開口 \\\hline
+\end{tabular}
+
+\section{交叉引用}
+
+在寫文章時，如果遇到要引用到文章的內容往往是最讓人頭疼的，因為只要文章一被修改過，你就很有可能需要將後面引用部分全部修改過，幸好 \LaTeX\ 針對這個問題提供了 \verb|\label{}\ref{}\pageref{}| 這三個命令，拯救我們脫離水深火熱之中。
+
+\subsection{標籤與引用}
+
+這三個命令，\verb`\label{}` 是指在文件中插入一個標籤，這個插入的標籤可以在之後的文章中被其他兩個命令給引用，這樣子即使前面的內容有所更動，只要標籤沒有換位置，那麼這個標籤就會一直向同一個物件，引用的結果也會是準確的。
+
+而 pageref 與 ref 則是不同的引用方式，pageref 會印出該標籤所在的頁數，而 ref 則會根據標籤所在的環境判斷輸出的編號，例如接在標題後就會輸出標題的編號，在 table 環境中就會輸出 table 的編號：
+
+\begin{tcblisting}{}
+ref 的用法就如表 \ref{tab:layout} 所展示的一般。
+\end{tcblisting}
+
+\subsection{超連結}
+
+如果你正在閱讀電子檔並且也隨著本書的進度練習，你可能會注意到本書的引用是有超連結的效果的，但在自己嘗試的時候就沒又超連結的效果，這是因為 \verb|\ref{}| 本身是沒有超連結功能的，本書的超連結功能是依靠 hyperref package 而並非 \LaTeX 本身的功能。
+
+hyperref 除了這種文件中的跳轉之外，他也可以實現網址的跳轉，網址的跳轉有兩種命令第一種是 \verb|\url{}| 另一個則是 \verb|\href{}{}| 兩著的差別在於 \verb|\url{}| 只需輸入網址，輸出的文字也是直接輸出網址，而 \verb|\href{}{}| 則可以分開設定網址與輸出的文字。
+
+\begin{tcblisting}{listing side text}
+\href{https://www.overleaf.com}{Overleaf}\\
+\url{https://www.overleaf.com}
+\end{tcblisting}
+
+如果需要調整連結的外觀可以利用 \verb|\hypersetup{}| 來調整， 下表是可以調整的參數：
+
+\begin{tabular}{ccc}
+\hline
+參數 & 含義 & 值 \\\hline\hline
+hidelinks & 不為連結特別標示 & 布林值 \\\hline
+linkcolor & 內部連結顏色 & 顏色名字 \\\hline
+urlcolor & 超連結顏色 & 顏色名字 \\\hline
+colorlinks & 是否幫連結上色 & 布林值 \\\hline
+breaklinks & 是否允許連結換行 & 布林值 \\\hline
+\end{tabular}

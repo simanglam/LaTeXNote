@@ -1,0 +1,90 @@
+\chapter{化學}
+
+\LaTeX\ 也能拿來排版化學相關的事物，但我們需要借用 mhchem 與 chemfig 的力量
+
+\begin{tcblisting}{listing only}
+\usepackage{mhchem}
+\usepackage{chemfig}
+\end{tcblisting}
+
+\section{化學式 \& 化學反應式}
+
+化學式與化學反應式利用 mhchem 提供的 \verb`\ce{}` 就可以達成了
+
+\begin{tcblisting}{listing side text}
+\ce{H2O}\\
+\ce{H2O2}\\
+\ce{NO-}
+\end{tcblisting}
+
+如果需要質量數可以用以下的方式
+
+\begin{tcblisting}{listing side text}
+\ce{^235_98U}\\
+\ce{^2_1H}\\
+\ce{^4_2He}
+\end{tcblisting}
+
+\verb`^` 代表上標 \verb`_` 代表下標，也可以打出分子內離子的氧化態
+
+\begin{tcblisting}{listing side text}
+\ce{Fe^{II}Fe^{III}2O4}
+\end{tcblisting}
+
+計量化學也可以利用相同的方式
+
+\begin{tcblisting}{listing side text}
+\ce{2H2O}\\
+\ce{1/2H2O}\\
+\ce{(1/2)H2O}\\
+\ce{$n$H2O}
+\end{tcblisting}
+
+化學反應式只需要加入 \verb`+` 或 \verb`->` 等等就好了
+
+\begin{tcblisting}{listing side text}
+\ce{H2O2 -> H2O + O2}
+\end{tcblisting}
+
+如果涉及到沈澱或產生氣體可以利用單獨的 \verb`^` 跟單獨的小寫 v，可逆反應則更改箭頭的樣式即可
+
+\begin{tcblisting}{listing side text}
+\ce{^ v}\\
+\ce{A <=> B}\\
+\ce{CaCO_3 + HCl <=> CaCl_2 v + H_2O + CO_2 ^}
+\end{tcblisting}
+
+如果需要加催化劑，可以用箭頭後加中括號的方式達成
+
+\begin{tcblisting}{listing side text}
+\ce{A ->[text above][text below] B]}\\
+\ce{H2O2 ->[MnO2] H2O + O2 ^}\\
+$\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}$
+\end{tcblisting}
+
+下圖是 mhchem 可以使用的箭頭種類
+
+\section{結構式}
+
+結構式需要借助 chemfig 提供的 \verb`\chemfig{}` 命令
+
+\begin{tcblisting}{listing side text}
+\chemfig{H-O-H}
+\end{tcblisting}
+
+你可能會想要調整角度，在 \verb`-` 後加[]可以解決這個問題，chemfig 可以接受預設角度、絕對角度與相對角度的輸入，預設角度就直接在括號內加入數字，預設是 0 ，之後每增加 1 角度增加 45 度，絕對角度需要在數字前加入\verb`:`，相對角度則是加入\verb`::` 
+
+\begin{tcblisting}{listing side text}
+\chemfig{A-[1]-[2]-[3]-[4]-[5]-[6]-[7]-[8]}
+\chemfig{A-[:45]-[:90]-[:135]-[:180]-[:225]-[:270]-[:315]-[:360]}
+\chemfig{A-[::+45]-[::+45]-[::+45]-[::+45]-[::+45]-[::+45]-[::+45]-[::+45]}
+\end{tcblisting}
+
+如果想要畫多邊形可以利用下面的技巧
+
+\begin{tcblisting}{listing side text}
+\chemfig{C*5(-A-B-C-D-E-F)}\\
+\chemfig{[:18]C*5(-A-B-C-D-E-F)}
+\end{tcblisting}
+
+如果你真的想做點什麼複雜的東西，我建議你可以參考奈米小人。
