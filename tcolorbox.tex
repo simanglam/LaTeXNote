@@ -1,34 +1,47 @@
 \chapter{tcolorbox}
 
-今天要介紹的是 tcolorbox，它提供了一個簡單的產生高度客製化 color box 的方式。
+這篇要介紹 tcolorbox 這個 package，他是利用 \TikZ 來繪製好看的 colorbox，同時兼具了強大的客製化功能，讓書本內需要的部分可以強調。
 
 \section{基礎使用}
 
-tcolorbox 提供了 tcolorbox 這個環境供我們建立 colorbox
+在 tcolorbox 中提供了 tcolorbox 的環境來創造 colorbox，這個環境有許多的可選參數，調整這些可選參數可以調整整個 colorbox 的樣式，
 
 \begin{tcblisting}{listing side text}
-\begin{tcolorbox}
-This is a colored box.
+\begin{tcolorbox}[colback=gray!30!white, colframe=gray!30!white]
+這是一個 colorbox。
 \end{tcolorbox}
 \end{tcblisting}
 
-\subsection{Style}
+\begin{description}
+\item[colback]
+\item[colbacklower]
+\item[colframe]
+\item[coltext]
+\item[subtitle style]
+\item[fonttitle]
+\item[boxrule]
+\end{description}
 
-\begin{tabular}{cc}
-參數 & 含義 \\\hline\hline
-colback & 底色 \\\hline
-colbacklower & 下半部分的底色 \\\hline
-colframe & 邊匡顏色 \\\hline
-coltitle & title 欄的底色 \\\hline
-colupper & 上半部分文字的顏色 \\\hline
-collower & 下半部分文字的顏色 \\\hline
-coltext & 文字顏色 \\\hline 
-subtitle style & title 欄的樣式 \\\hline
-boxrule & 邊匡粗細 \\\hline
-fonttitle & 標題文字的樣式 \\\hline
-fontupper & 上半部分文字的樣式 \\\hline
-fontlower & 下半部分文字的顏色 \\\hline
-\end{tabular}
+\begin{description}
+\item[colupper]
+\item[collower]
+\item[fontupper]
+\item[fontlower]
+\end{description}
+
+%參數 & 含義 \\\hline\hline
+%colback & 底色 \\\hline
+%colbacklower & 下半部分的底色 \\\hline
+%colframe & 邊匡顏色 \\\hline
+%coltitle & title 欄的底色 \\\hline
+%colupper & 上半部分文字的顏色 \\\hline
+%collower & 下半部分文字的顏色 \\\hline
+%coltext & 文字顏色 \\\hline 
+%subtitle style & title 欄的樣式 \\\hline
+%boxrule & 邊匡粗細 \\\hline
+%fonttitle & 標題文字的樣式 \\\hline
+%fontupper & 上半部分文字的樣式 \\\hline
+%fontlower & 下半部分文字的顏色 \\\hline
 
 需要注意的是 colbacklower 需要搭配其他命令才可使用，之後會介紹到，如果想要設定一個預設值可以利用`\tcbset{}`來完成。
 
