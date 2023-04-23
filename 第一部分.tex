@@ -1,10 +1,13 @@
+\chapter{安裝 \LaTeX}
+
+
 \chapter{\LaTeX\ 簡介}
 
-在第一章時，我們簡單的介紹了 \LaTeX\ 的歷史，而這一章是要介紹 \LaTeX\ 的基礎背景知識，讓大家可以快速理解 \LaTeX\ 的分支們，並且可以依照自己的需求選擇最適合的分支。
+在第一章時，我們簡單的介紹了 \LaTeX\ 的歷史，而這一章是要介紹 \LaTeX\ 的基礎背景知識，也由於 \LaTeX\ 有著許多不同的分支，這一章也希望讓大家可以快速理解 \LaTeX\ 的分支們，並且可以依照自己的需求選擇最適合的分支。
 
 \section{編譯引擎與格式}
 
-\LaTeX\ 可以拆成兩個部分，一個是編譯引擎(Engine）一個是格式，格式在 \LaTeX\ 裡有介紹到，裡面將基本命令封裝成高級命令，且負責描述排版細節，而編譯引擎則是負責將這些排版細節轉成 PDF 的工作。
+\LaTeX\ 可以拆成兩個部分，一個是編譯引擎(Engine）一個是格式(Format)，格式在 \LaTeX\ 裡有介紹到，裡面將基本命令封裝成高級命令，且負責描述排版細節，而編譯引擎則是負責將這些排版細節轉成 PDF 的工作。
 
 \subsection{編譯引擎}
 
@@ -20,7 +23,7 @@
 
 \subsubsection{\TeX}
 
-由高德納教授發明的，是目前所有編譯引擎的基礎，但只支持 ASCII 編碼，所以 CJK 文字無法利用 \TeX\ 來排版，並且只能輸出 .dvi 檔，還需使用 dvipdf 將其轉換成 PDF 檔。
+由高德納教授發明的，是目前所有編譯引擎的基礎，但只支持 ASCII 編碼，所以 CJK 文字無法利用 \TeX\ 來排版，並且只能輸出 .dvi 檔，還需使用 dvipdfmx 將其轉換成 PDF 檔。
 
 \subsubsection{pdf\TeX}
 
@@ -40,9 +43,9 @@
 
 由於 \TeX 龐大且複雜的家族，在之後的篇幅中 \LaTeX 皆指 \XeTeX 與 \LaTeX 的組合，若用了其他不同的編譯引擎，一率會以 XX\LaTeX 表示。
 
-\section{發行版}
+\section{\TeX 發行版(Distribution)}
 
-TeX 發行版可以說是將編譯引擎、格式與 Pacakge 都集中到一起的集合，通常我們不會單獨下載編譯引擎與格式，而是會直接下載發行版。我所知發行版有以下三種。
+\TeX 發行版可以說是將編譯引擎、格式與 Pacakge 都集中到一起的集合，通常我們不會單獨下載編譯引擎與格式，而是會直接下載發行版。我所知發行版有以下三種。
 
 \begin{itemize}
 \item TeX Live
@@ -50,15 +53,15 @@ TeX 發行版可以說是將編譯引擎、格式與 Pacakge 都集中到一起�
 \item MacTeX
 \end{itemize}
 
-\subsection{TeX Live}
+\subsection{\TeX Live}
 
-由 TUG（\TeX\ User Group）維護的發行版，可以說是目前最活躍的 \TeX\ 發行版，但我並不是使用這個發行版，關於使用方法可以參考使用手冊 \url{https://tug.org/texlive/doc.html}。
+由 TUG（\TeX\ User Group）維護的發行版，可以說是目前最活躍的 \TeX\ 發行版，但我並不是使用這個發行版，關於使用方法可以參考使用手冊 \url{https://tug.org/texlive/doc.html}\footnote{目前只有簡體中文翻譯，並無無繁體中文翻譯}。
 
-\subsection{MiKTeX}
+\subsection{MiK\TeX}
 
-MiKTeX 的設計理念是夠用就好（Just Enough \TeX ），一開始安裝時只需要下載基本的 Package 即可，隨後如果有缺失的 Package 便會在編譯時下載，如果你不想裝龐大的 \TeX\ 發行版可以考慮這個。
+MiKTeX 的設計理念是盡量將\TeX 發行版的規模保持在最小\footnote{實際上 \TeX\ Live 也可以只下載部分 Package，但 \TeX\ Live 無法像 MiK\TeX 一樣自動下載缺少的 Package}（Just Enough \TeX ），一開始安裝時只需要下載基本的 Package 即可，隨後如果有缺少的 Package 便會在編譯時下載，如果你不想裝龐大的 \TeX\ 發行版可以考慮這個。
 
-\subsection{MacTeX}
+\subsection{Mac\TeX}
 
 MacTeX 實際上是對 TeX Live 進行改造，加入許多對於 MacOS 系統的優化，適合想在 MacOS 上使用 \TeX\ 卻又不想搗鼓太多的人。
 
@@ -68,11 +71,11 @@ MacTeX 實際上是對 TeX Live 進行改造，加入許多對於 MacOS 系統�
 
 \subsection{texmaker}
 
-texmaker 是我目前使用的編輯器，他是專門為 \LaTeX\ 開發的自由軟體，所以他對 \LaTeX\ 的支持相當的好，不只有自動補全命令，還可以整理出 \LaTeX\ 編譯過程中的問題，讓你可以一邊查看原始碼一邊查看問題。
+texmaker 是我目前使用的編輯器。他是專門為 \LaTeX\ 開發的自由軟體，所以他對 \LaTeX\ 的支持相當的好，不只有自動補全命令，還可以整理出 \LaTeX\ 編譯過程中的問題，讓你可以一邊查看原始碼一邊查看問題。
 
-\subsection{Vim \& Emacs}
-
-如果你是這兩個編輯器的愛好者，你也可以選擇使用這兩個編輯器，由於我並不是這兩個編輯器的使用者，所以我無法在這兩個編輯器上給出建議。
+%\subsection{Vim \& Emacs}
+%
+%如果你是這兩個編輯器的愛好者，你也可以選擇使用這兩個編輯器。由於我並不是這兩個編輯器的使用者，所以我無法在這兩個編輯器上給出建議。
 
 \subsection{VS Code}
 
@@ -128,23 +131,11 @@ Hello World!
 
 \subsection{分組}
 
-分組是 LaTeX 中的一個概念，可以將其類比為一個 HTML 的 \verb|<p>| 標籤，通常用來限定命令的作用範圍，使用方式也很簡單，就是將想讓命令作用的範圍用\{包起來即可\}，範例如下：
+分組是 LaTeX 中的一個概念，可以將其類比為一個用來界定範圍的工具，通常用來限定命令的作用範圍，使用方式也很簡單，就是將想讓命令作用的範圍用\{包起來即可\}，範例如下：
 
 \begin{tcblisting}{sidebyside}
 %\large 更改字型大小
 {\large A}A
-\end{tcblisting}
-
-\subsection{假空白}
-
-LaTeX 的命令有可分為兩種有參數與沒參數的，通常可選參數會被 \verb|[]| 包圍起來並置於被 \verb|{}| 包圍起來的的必選參數前。前面提到命令只會在遇到數字、保留字符或空白才會被視為一個整體，這就會導致一個問題，像 \verb`\LaTeX` 這樣沒有必選參數的命令後面必須要接一個空白，但這個空白會被 \LaTeX 忽略掉，可以用以下兩種方法來解決這個問題。
-
-\begin{tcblisting}{sidebyside}
-\LaTeX and Something. %空格被忽略
-
-\LaTeX{} and Something.%在命令後接花括號
-
-\LaTeX\ and Something.%在命令之後接反斜槓
 \end{tcblisting}
 
 \section{Preamble}
@@ -220,17 +211,17 @@ badbox 是 \LaTeX\ 的一個特殊的錯誤類型，這個錯誤類型是來自�
 
 error 則與 warning 相反，其足以使編譯過程停止或導致奇怪的結果，遇到這種問題建議直接向他人詢問，並請附上原始檔與 log 檔的紀錄，以便他人快速釐清問題所在。
 
-\chapter{中文環境配置}
+\section{中文環境配置}
 
 專為英文排版開發的 \LaTeX\ 在面對拉丁語系時都有不錯的表現，可是 \LaTeX 看不懂中文，無法直接利用 \LaTeX 進行中文排版，且當 \LaTeX\ 遇到與拉丁語系相差許多的語言時，\LaTeX 還是會依據拉丁語系的排版規則來排版，這會造成結果不盡人意，這一篇就是要教大家如何解決這個問題。
 
-\section{前置作業}
+\subsection{前置作業}
 
 在開始建構中文環境之前，我們需要先探討為什麼 \LaTeX 無法直接排版中文，這個問題可以分成兩個部分來回答，第一是因為原始的\TeX 本身只能處理 ASCII 編碼，無法處理其他類型的編碼檔案，第二是因為 \LaTeX 並沒有預設中文字型，所以即使可以處理編碼問題，一樣沒有字型可以堪入文件中。
 
 解決方法也很簡單，現代的編譯引擎（LuaTeX \& XeTeX）都可以處理 UTF-8 編碼的檔案了，並解他們也與現代的字體技術相容，可以直接使用 TrueType 或 OpenType 的字體。
 
-\section{中文字型導入}
+\subsection{中文字型導入}
 
 要在 LaTeX 中導入字體可以借助 fontspec 的幫助：
 
@@ -253,9 +244,9 @@ error 則與 warning 相反，其足以使編譯過程停止或導致奇怪的�
 \end{tcblisting}
 
 在實際的使用中，可以利用上面範例中的，這些命令來調整中文排版字型的細節。
-\section{字型}
+\subsection{字型}
 
-\subsection{字體大小}
+\subsubsection{字體大小}
 
 \LaTeX\ 預設內文字體是 10pt 並提供了 11 \& 12 pt 可供使用，並且 \LaTeX\ 有預設一些字體大小
 
@@ -277,7 +268,7 @@ error 則與 warning 相反，其足以使編譯過程停止或導致奇怪的�
 如果想要使用特殊的字體大小可利用 \verb|\fontsize{font size}{line skip}| 來宣告特殊的字號，要注意的是在這個命令後需要補上\verb|\selectfont| 使用宣告的字號。
 
 
-\subsection{粗體與斜體}
+\subsubsection{粗體與斜體}
 
 在英文中利用粗體與斜體是標示重點的常用做法，而在中文中通常不會使用斜體來標示重點，所以若沒有經過適當的設定便直接使用 \LaTeX 中的命令會造成結果不符合中文排版的習慣，想要解決這個問題需要另用以下這兩個命令來解決：
 
@@ -297,11 +288,11 @@ error 則與 warning 相反，其足以使編譯過程停止或導致奇怪的�
 一般的字體，\textbf{這是粗體}\textit{這是斜體}\textbf{\textit{這是斜體加粗體}}
 \end{tcblisting}
 
-\chapter{版面配置}
+\section{版面配置}
 
 在處理完字體之後就進到書籍的版面配置，想要排版結果賞心悅目並有自己的風格，那麼這章節是必不可跳過的一章，在這章內會解說 \LaTeX 版面配置的運作原理，另外也會針對文繞圖進行說明。
 
-\section{一些內建的處理}
+\subsection{一些內建的處理}
 
 \LaTeX 內建的文件類別中便有一些預先定義好的選項可供選擇：
 
@@ -315,7 +306,7 @@ twocolumn & 雙欄模式 \\\hline
 landscape & 將紙張旋轉90度 \\\hline
 \end{tabular}
 
-\section{邊界}
+\subsection{邊界}
 
 邊界可以利用 geometry package 來設定
 
@@ -339,7 +330,7 @@ outter & 雙頁模式下的右側邊界 \\\hline
 inner & 雙頁模式下的右側邊界 \\\hline
 \end{tabular}
 
-\section{參數}
+\subsection{參數}
 
 在\LaTeX\ 中段落的位置是由許多不同的參數相互制衡而得出的，這些參數有的決定單詞與單詞間的距離、有些決定端落雨段落之間的距離，正是多虧了這些參數我們才可以利用 \LaTeX 排版出如此優美的結果，要調整這些參數皆需使用 \verb|\setlength{參數}{數值}| 進行調整，以下是這裡要介紹的參數：
 
@@ -367,7 +358,7 @@ lineskip & 行距相關
 
 上表所示便是這些參數的功用。唯需要注意由於 \LaTeX 會將 chapter 後的第一段落視為引言，而在被視為引言的段落是不會有縮排的，所以若是發現 chapter 後的第一章節沒有縮排，請不要慌張，這時可以使用indentfirst 這個 package 來解決。
 
-\section{行距}
+\subsection{行距}
 
 由於行距在 \LaTeX 中很複雜，所以在這裡特別拉出一個小節講解，baselineskip 是指兩行字基線的距離，是透過 $\text{font size} \times 1.2 \times \text{linespread\{value\}}$ 得出的，若要在文本區內更改，需要使用 \verb|\selectfont| 命令。
 
@@ -384,7 +375,7 @@ AAAAAA\\}
 
 lineskip 則是在上下兩條基線超過 baselineskip 時兩行之間的距離，如果要調整行距，建議使用 setspace package 提供的 \verb|\singlespacing| \verb|\onehalfspacing| \verb|\doublespacing| 命令，或者利用 \verb|\linespread{vaule}| 設定行距。
 
-\section{頁首、頁尾}
+\subsection{頁首、頁尾}
 
 頁首頁尾可以藉由 fancyhdr 這個 package 來自定義，它提供了 fancyhead 與fancyfoot 與一些可選參數來協助我們定義頁首與頁尾。
 
@@ -422,7 +413,7 @@ lineskip 則是在上下兩條基線超過 baselineskip 時兩行之間的距離
 \pagestyle{name}%使用新的 pagestyle
 \end{tcblisting}
 
-\section{列表}
+\subsection{列表}
 
 在 \LaTeX\ 中有三種不同的列表環境， 分別是 itemize, enumerate 與 description，這三個在使用上除了輸出結果不同外，使用方式是完全相同的。Itemize 是最簡單的列表環境，只要在需要項目符號的地方放上 \verb|\item| 即可創造出一個項目符號，若想更改項目符號也可以利用在 item 後利用 [項目符號] 的方式自訂。
 
@@ -447,12 +438,25 @@ lineskip 則是在上下兩條基線超過 baselineskip 時兩行之間的距離
 \end{enumerate}
 \end{tcblisting}
 
+\subsection{腳註與邊註}
 
-\chapter{圖片與表格}
+在書籍排版中有時會需要使用腳註和邊註，腳註的用法如下：
+
+\begin{tcblisting}{}
+這是一段文字，我在這裡下一個腳註\footnote{這是一個腳註}。
+\end{tcblisting}
+
+可以看到在 \verb|\footnote{•}| 中的文字以比較小的字體出現在了底部，並且還帶有編號。邊註的用法與此差不多，但須將\verb|\footnote{}| 改成\verb|\marginpar{}|。不過由於本書左右兩側空白空間不足，所以只展示程式碼，而不展示排版成果。如果有興趣可以在自己的電腦上試試看。
+
+\begin{tcblisting}{listing only}
+這是一段文字，我在這裡下一個邊註\marginpar{這是一個邊註}。
+\end{tcblisting}
+
+\section{圖片與表格}
 
 \LaTeX\ 本身是不能處理圖片的，所以我們需要借用 graphicx 來讓 \LaTeX\ 處理圖片，其實還有另一個可以處理圖片的 package 叫 graphics ，他們兩個像是同一個 package 但用著不同的 interface ，兩個除了可選參數的形式之外，不論是命令還是必選參數都一樣。在這裡介紹的是 graphicx ，如果想要使用 graphics 請參考說明文件。
 
-\section{表格}
+\subsection{表格}
 
 想要在 \LaTeX\ 中使用表格需要利用 tabular 環境
 
@@ -493,7 +497,7 @@ lineskip 則是在上下兩條基線超過 baselineskip 時兩行之間的距離
 \end{table}
 \end{tcblisting}
 
-\section{基礎}
+\subsection{基礎}
 
 只要使用\verb|\includegraphics{檔案}|就可以將圖片導入文件中了
 
@@ -554,7 +558,7 @@ draft & 啟動草稿模式 \\\hline
 \reflectbox{文字}
 \end{tcblisting}
 
-\section{浮動體環境}
+\subsection{浮動體環境}
 
 按著以上的方式用了一段時間後，你可能會發現這樣產出的結果並不好看，這時只要將圖片放進 figure 環境即可，\LaTeX\ 就會自動幫挑選好位置插入圖片了
 
